@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontendController::class, 'index']);
-Route::get('/certificates/{id}', [FrontendController::class, 'certificate']);
-
-include('admin.php');
-include('user.php');
+Route::prefix(config('app.admin_prefix'))->group(function () {
+    Route::name('admin.')->group(function () {
+        // Auth routes
+        Route::middleware(['guest'])->group(function () {
+            // Route::get('login', [AuthController::class, 'loginView'])->name('login');
+            // Route::post('login', [AuthController::class, 'login']);
+        });
+    });
+});

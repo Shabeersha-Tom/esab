@@ -2,6 +2,9 @@
 
 return [
 
+
+    'admin_prefix' => env('ADMIN_PREFIX', 'esab_admin'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -161,6 +164,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
+        App\Providers\FortifyServiceProvider::class,
+
 
         /*
          * Package Service Providers...
