@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ESAB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="font/iconsmind-s/css/iconsminds.css" />
+    <link rel="stylesheet" href="font/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.rtl.only.min.css" />
+    <link rel="stylesheet" href="css/vendor/jquery.contextMenu.min.css" />
+    <link rel="stylesheet" href="css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="css/vendor/component-custom-switch.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    <nav class="navbar fixed-top">
+        <div class="d-flex align-items-center navbar-left">
+            <a href="#" class="menu-button d-none d-md-block">
+                <svg class="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 17">
+                    <rect x="0.48" y="0.5" width="7" height="1" />
+                    <rect x="0.48" y="7.5" width="7" height="1" />
+                    <rect x="0.48" y="15.5" width="7" height="1" />
+                </svg>
+                <svg class="sub" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17">
+                    <rect x="1.56" y="0.5" width="16" height="1" />
+                    <rect x="1.56" y="7.5" width="16" height="1" />
+                    <rect x="1.56" y="15.5" width="16" height="1" />
+                </svg>
+            </a>
+
+            <a href="#" class="menu-button-mobile d-xs-block d-sm-block d-md-none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
+                    <rect x="0.5" y="0.5" width="25" height="1" />
+                    <rect x="0.5" y="7.5" width="25" height="1" />
+                    <rect x="0.5" y="15.5" width="25" height="1" />
+                </svg>
+            </a>
+
+            <div class="search" data-search-path="Pages.Search.html?q=">
+                <input placeholder="Search...">
+                <span class="search-icon">
+                    <i class="simple-icon-magnifier"></i>
+                </span>
+            </div>
+
+         
+        </div>
+
+
+        <a class="navbar-logo" href="dashboard.html">
+            <span class="logo d-block"></span>
+        </a>
+
+        <div class="navbar-right">
+         
+
+            <div class="user d-inline-block">
+                <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span class="name">Sarah Kortney</span>
+                  
+                </button>
+                <div class="dropdown-menu dropdown-menu-right mt-3">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+  <div class="menu">
+        <div class="main-menu">
+            <div class="scroll">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="iconsminds-shop-4"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="certificates.html">
+                            <i class="iconsminds-digital-drawing"></i> Certificates
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#ui">
+                            <i class="iconsminds-air-balloon-1"></i>Admin
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="sub-menu">
+            <div class="scroll">
+     
+                <ul class="list-unstyled" data-link="ui" id="ui">
+                        <div id="collapseAuthorization" class="collapse show">
+                            <ul class="list-unstyled inner-level-menu">
+                                <li class="active">
+                                    <a href="admin_roles.html">
+                                        <i class="simple-icon-doc"></i> <span
+                                            class="d-inline-block">Admin Roles</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="admin_users.html">
+                                        <i class="simple-icon-doc"></i> <span
+                                            class="d-inline-block active">Admin Users</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="container-fluid disable-text-selection">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="mb-3 d-flex align-items-center justify-content-between">
+                        <h1 class="pb-0">Update Admin Roles</h1>
+                        <a href="admin_roles.html" class="btn btn_primary">Back</a>
+
+                    </div>
+
+                    
+
+                 
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-lg-12 col-md-12 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Role Name</label>
+                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Enter role name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Status</label>
+                                        <select class="form-control">
+                                            <option value="1">Enable</option>
+                                            <option value="2">Disable</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                
+
+                                
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <form>
+                         
+                               
+                                <h5 class="mb-3"><b>Admin Role</b></h5>
+                                <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
+                            
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck1">List View</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck2">Details View</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck3" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck3">Add</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck4" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck4">Edit</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck5">Delete</label>
+                                    </div>
+                                   
+                                    
+                                </div>
+                      
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <form>
+                         
+                               
+                                <h5 class="mb-3"><b>Admin Users</b></h5>
+                                <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
+                           
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck11" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck11">List View</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck22" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck22">Details View</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck33" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck33">Add</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck44" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck44">Edit</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck55" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck55">Delete</label>
+                                    </div>
+                                   
+                                    
+                                </div>
+                      
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <form>
+                         
+                               
+                                <h5 class="mb-3"><b>Certificates</b></h5>
+                                <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
+                           
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck111" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck111">List View</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck222" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck222">Details View</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck333" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck333">Add</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck444" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck444">Edit</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck555" name="jQueryCheckbox" required="">
+                                        <label class="custom-control-label" for="customCheck555">Delete</label>
+                                    </div>
+                                   
+                                    
+                                </div>
+                      
+
+                            </form>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <a href="admin_roles.html" class="btn btn_primary">Update</a>
+                        </div>
+                    </div>
+                </div>
+              
+
+                   
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-0 text-muted">©2022 ESAB.</p>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="js/vendor/mousetrap.min.js"></script>
+    <script src="js/vendor/jquery.contextMenu.min.js"></script>
+    <script src="js/dore.script.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

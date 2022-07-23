@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ESAB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="font/iconsmind-s/css/iconsminds.css" />
+    <link rel="stylesheet" href="font/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.rtl.only.min.css" />
+    <link rel="stylesheet" href="css/vendor/jquery.contextMenu.min.css" />
+    <link rel="stylesheet" href="css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="css/vendor/component-custom-switch.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/favicon.ico" />
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    <nav class="navbar fixed-top">
+        <div class="d-flex align-items-center navbar-left">
+            <a href="#" class="menu-button d-none d-md-block">
+                <svg class="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 17">
+                    <rect x="0.48" y="0.5" width="7" height="1" />
+                    <rect x="0.48" y="7.5" width="7" height="1" />
+                    <rect x="0.48" y="15.5" width="7" height="1" />
+                </svg>
+                <svg class="sub" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17">
+                    <rect x="1.56" y="0.5" width="16" height="1" />
+                    <rect x="1.56" y="7.5" width="16" height="1" />
+                    <rect x="1.56" y="15.5" width="16" height="1" />
+                </svg>
+            </a>
+
+            <a href="#" class="menu-button-mobile d-xs-block d-sm-block d-md-none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
+                    <rect x="0.5" y="0.5" width="25" height="1" />
+                    <rect x="0.5" y="7.5" width="25" height="1" />
+                    <rect x="0.5" y="15.5" width="25" height="1" />
+                </svg>
+            </a>
+
+            <div class="search" data-search-path="Pages.Search.html?q=">
+                <input placeholder="Search...">
+                <span class="search-icon">
+                    <i class="simple-icon-magnifier"></i>
+                </span>
+            </div>
+
+         
+        </div>
+
+
+        <a class="navbar-logo" href="dashboard.html">
+            <span class="logo d-block"></span>
+        </a>
+
+        <div class="navbar-right">
+         
+
+            <div class="user d-inline-block">
+                <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span class="name">Sarah Kortney</span>
+                  
+                </button>
+                <div class="dropdown-menu dropdown-menu-right mt-3">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
+
+      
+            </div>
+        </div>
+    </nav>
+  <div class="menu">
+        <div class="main-menu">
+            <div class="scroll">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="iconsminds-shop-4"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#layouts">
+                            <i class="iconsminds-digital-drawing"></i> Certificates
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin_roles.html">
+                            <i class="iconsminds-air-balloon-1"></i> Admin
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="sub-menu">
+            <div class="scroll">
+     
+                <ul class="list-unstyled" data-link="layouts" id="layouts">
+                        <div id="collapseAuthorization" class="collapse show">
+                            <ul class="list-unstyled inner-level-menu">
+                                <li class="active">
+                                    <a href="certificates.html">
+                                        <i class="iconsminds-files"></i> <span
+                                            class="d-inline-block">Certificates</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="search_certificate.html">
+                                        <i class="simple-icon-magnifier"></i> <span
+                                            class="d-inline-block">Search Certificate</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="upload_auto.html">
+                                               <i class="iconsminds-qr-code"></i> <span
+                                                   class="d-inline-block ">Upload(QR Code Auto)</span>
+                                           </a>
+                                       </li>
+                                       <li>
+                                           <a href="upload_position.html">
+                                               <i class="simple-icon-cloud-upload"></i> <span
+                                                   class="d-inline-block">Upload(QR Code Manual)</span>
+                                           </a>
+                                       </li>
+                                
+
+                           
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="container-fluid disable-text-selection">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3 d-flex align-items-center justify-content-between">
+                        <h1 class="m-0 p-0">Certificates</h1>
+                        <div class="btn_group">
+                            <a href="#" class="btn btn_secondary mr-2"  data-toggle="modal"
+                            data-backdrop="static" data-target="#exampleModalRight">Filter</a>
+                            <a href="#" class="btn btn_primary">Export Excel</a>
+                        </div>
+                    </div>
+                  
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-xl-12">
+                    <div class="card recent_certificate">
+                      
+                        <div class="card-body">
+                            <div class="data_card">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered mb-0">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Certificate No</th>
+                                            <th scope="col">Test</th>
+                                            <th scope="col">Item 1</th>
+                                            <th scope="col">Item 2</th>
+                                            <th scope="col">Lot 1</th>
+                                            <th scope="col">Lot 2</th>
+                                            <th scope="col">Uploaded Date</th>
+                                            <th scope="col">Uploaded User</th>
+                                            <th scope="col">No of Downloads</th>
+                                            <th scope="col">No of Views</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td><a href="certificate_view.html">170322</a></td>
+                                            <td>AE220326P</td>
+                                            <td>76184040G0</td>
+                                            <td>76184040G1</td>
+                                            <td>SBV4410007</td>
+                                            <td>SBV4410005</td>
+                                            <td>30/06/2022</td>
+                                            <td>Jacob</td>
+                                            <td>25</td>
+                                            <td>38</td>
+                                          </tr>
+                                          <tr>
+                                              <td><a href="certificate_view.html">170450</a></td>
+                                              <td>AE220326P</td>
+                                              <td>76184040G0</td>
+                                              <td>76184040G2</td>
+                                              <td>SBV4410007</td>
+                                              <td>SBV4410006</td>
+                                              <td>28/06/2022</td>
+                                              <td>Mark</td>
+                                              <td>55</td>
+                                              <td>29</td>
+                                            </tr>
+      
+                                            <tr>
+                                              <td><a href="certificate_view.html">170322</a></td>
+                                              <td>AE220326P</td>
+                                              <td>76184040G0</td>
+                                              <td>76184040G5</td>
+                                              <td>SBV4410007</td>
+                                              <td>SBV4410007</td>
+                                              <td>30/06/2022</td>
+                                              <td>Jacob</td>
+                                              <td>25</td>
+                                              <td>24</td>
+                                            </tr>
+                     
+                                        </tbody>
+                                      </table>
+                                </div>
+                           
+                               </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <p class="mb-0 text-muted">©2022 ESAB.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade modal-right" id="exampleModalRight" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalRight" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filter By Certificates</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label>User</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>Select User</option>
+                            <option>Jacob</option>
+                            <option>Mark</option>
+                          </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="text" class="form-control datepicker" placeholder="Select Start Date">
+                    </div>
+
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="text" class="form-control datepicker" placeholder="Select End Date">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer justify-content-start">
+                <button type="button" data-dismiss="modal" class="btn btn_primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <script src="js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="js/vendor/mousetrap.min.js"></script>
+    <script src="js/vendor/jquery.contextMenu.min.js"></script>
+    <script src="js/dore.script.js"></script>
+    <script src="js/vendor/bootstrap-datepicker.js"></script>
+    <script src="js/scripts.js"></script>
+
+
+
+
+          
+
+      
+
+</body>
+
+</html>
