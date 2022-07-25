@@ -12,15 +12,16 @@
                 <div class="card search_certificates">
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.certificates.search') }}">
+                            @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <input type="email" class="form-control" id="inputEmail4"
+                                    <input autofocus name="q" required type="text" class="form-control" id="inputEmail4"
                                         placeholder="Search certificate no / test / item / lot ">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-2">
-                                    <a href="certificate_list.html" class="btn btn_primary">Search</a>
+                                    <input type="submit" value="Search" class="btn btn_primary">
                                 </div>
                             </div>
                         </form>

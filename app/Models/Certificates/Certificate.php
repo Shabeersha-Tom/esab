@@ -5,8 +5,10 @@ namespace App\Models\Certificates;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Certificate extends Model
+class Certificate extends Model implements Searchable
 {
     use HasFactory;
 
@@ -21,6 +23,14 @@ class Certificate extends Model
         'views',
         'downloads',
     ];
+
+    public function getSearchResult(): SearchResult
+    {
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            "",
+        );
+    }
 
     function user()
     {

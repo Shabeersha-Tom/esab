@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateCertificateRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\Searchable\Search;
+use Spatie\Searchable\ModelSearchAspect;
 
 class CertificateController extends Controller
 {
@@ -48,7 +50,26 @@ class CertificateController extends Controller
     }
     public function searchResult(Request $request)
     {
-        dd($request);
+        $searchResults = (new Search())
+            ->registerModel(
+                Certificate::class,
+                'certificate_no',
+                'test',
+                'item_1',
+                'item_2',
+                'lot_1',
+                'lot_2',
+            )
+            ->search($request->q);
+
+        $searchResults->each(function ($q) {
+            $q->searchable->load('user');
+        });
+
+        // dd($searchResults);
+
+        return view('admin.certificates.search-result')
+            ->with(['searchResults' => $searchResults]);
     }
 
     public function uploadAutoView()

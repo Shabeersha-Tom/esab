@@ -16,6 +16,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "silber/bouncer": "^1.0",
+        "spatie/laravel-searchable": "^1.11",
         "wildside/userstamps": "^2.2"
     },
     "require-dev": {
