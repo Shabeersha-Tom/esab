@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{ getAdminAsset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ getAdminAsset('css/main.css') }}" />
     <link rel="shortcut icon" href="{{ getAdminAsset('img/favicon.ico') }}" />
+
+    @stack('header')
+
 </head>
 
 <body id="app-container" class="menu-default show-spinner rounded">
@@ -61,6 +64,9 @@
     <script src="{{ getAdminAsset('js/vendor/mousetrap.min.js') }}"></script>
     <script src="{{ getAdminAsset('js/dore.script.js') }}"></script>
     <script src="{{ getAdminAsset('js/scripts.single.theme.js') }}"></script>
+
+
+    @stack('footer')
 
     {{-- Logout Form Start --}}
     <form action="{{ route('logout') }}" method="post" id="logoutForm">

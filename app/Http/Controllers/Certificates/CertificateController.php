@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Certificates;
+namespace App\Http\Controllers\Certificates;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificates\Certificate;
 use App\Http\Requests\StoreCertificateRequest;
 use App\Http\Requests\UpdateCertificateRequest;
+use App\Models\User;
 
 class CertificateController extends Controller
 {
@@ -16,72 +17,27 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        $certificates = Certificate::all();
+        return view('admin.certificates.index')
+            ->with([
+                'users' => $users,
+                'certificates' => $certificates
+            ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function searchView()
     {
-        //
+        return view('admin.certificates.search');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCertificateRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCertificateRequest $request)
+    public function uploadAutoView()
     {
-        //
+        return view('admin.certificates.uploadauto');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Certificates\Certificate  $certificate
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Certificate $certificate)
+    public function uploadManualView()
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Certificates\Certificate  $certificate
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Certificate $certificate)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCertificateRequest  $request
-     * @param  \App\Models\Certificates\Certificate  $certificate
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCertificateRequest $request, Certificate $certificate)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Certificates\Certificate  $certificate
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Certificate $certificate)
-    {
-        //
+        return view('admin.certificates.uploadmanual');
     }
 }

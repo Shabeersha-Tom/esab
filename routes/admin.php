@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Certificates\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +33,16 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
 
             // Certificates Route
             Route::group(['prefix' => 'certificates', 'as' => 'certificates.'], function () {
-                Route::get('/', function () {
-                    dd('asd');
-                })->name('index');
+                Route::get('/', [CertificateController::class, 'index'])->name('index');
+
+                Route::get('/search', [CertificateController::class, 'searchView'])->name('search');
+                Route::post('/search', [CertificateController::class, 'searchResult']);
+
+                Route::get('/upload-auto', [CertificateController::class, 'uploadAutoView'])->name('uploadauto');
+                Route::post('/upload-auto', [CertificateController::class, 'uploadAuto']);
+
+                Route::get('/upload-manual', [CertificateController::class, 'uploadManualView'])->name('uploadmanual');
+                Route::post('/upload-manual', [CertificateController::class, 'uploadManual']);
             });
 
             // All Users 
