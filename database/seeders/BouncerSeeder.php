@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Bouncer;
+use Illuminate\Support\Facades\Hash;
 
 class BouncerSeeder extends Seeder
 {
@@ -25,12 +26,65 @@ class BouncerSeeder extends Seeder
 
         $ban = Bouncer::ability()->firstOrCreate([
             'name' => 'admin-role-list',
+            'title' => 'List Admin Role',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-role-view',
             'title' => 'View Admin Role',
         ]);
         $ban = Bouncer::ability()->firstOrCreate([
-            'name' => 'admin-role-list',
-            'title' => 'View Admin Role',
+            'name' => 'admin-role-add',
+            'title' => 'Add Admin Role',
         ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-role-edit',
+            'title' => 'Edit Admin Role',
+        ]);
+
+
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-user-list',
+            'title' => 'List Admin Users',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-user-view',
+            'title' => 'View Admin User',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-user-add',
+            'title' => 'Add Admin User',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-user-edit',
+            'title' => 'Edit Admin User',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-user-delete',
+            'title' => 'Delete Admin User',
+        ]);
+
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'certificates-list',
+            'title' => 'List Certificates',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'certificates-view',
+            'title' => 'View Certificate',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'certificates-add',
+            'title' => 'Add Certificate',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'certificates-delete',
+            'title' => 'Delete Certificate',
+        ]);
+
+        // $user = User::create([
+        //     'name' => 'Manager',
+        //     'email' => 'manager@esab.com',
+        //     'password' => Hash::make('password'),
+        // ]);
 
         // $user = User::find(1);
         // $user->assign('superadmin');

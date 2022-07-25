@@ -34,9 +34,11 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
             // Certificates Route
             Route::group(['prefix' => 'certificates', 'as' => 'certificates.'], function () {
                 Route::get('/', [CertificateController::class, 'index'])->name('index');
+                Route::post('/', [CertificateController::class, 'filter']);
 
                 Route::get('/search', [CertificateController::class, 'searchView'])->name('search');
                 Route::post('/search', [CertificateController::class, 'searchResult']);
+
 
                 Route::get('/upload-auto', [CertificateController::class, 'uploadAutoView'])->name('uploadauto');
                 Route::post('/upload-auto', [CertificateController::class, 'uploadAuto']);

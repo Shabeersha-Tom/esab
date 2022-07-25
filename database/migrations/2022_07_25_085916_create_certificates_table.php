@@ -15,7 +15,7 @@ class CreateCertificatesTable extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->foreignId('user_id')->constrained('users');
             $table->integer('certificate_no')->unique();
             $table->string('test')->nullable();
             $table->string('item_1')->nullable();

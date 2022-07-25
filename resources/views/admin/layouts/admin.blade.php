@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ getAdminAsset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ getAdminAsset('css/main.css') }}" />
     <link rel="shortcut icon" href="{{ getAdminAsset('img/favicon.ico') }}" />
+    <script src="{{ getAdminAsset('js/vendor/jquery-3.3.1.min.js') }}"></script>
 
     @stack('header')
 
@@ -46,7 +47,6 @@
     {{-- Footer --}}
     @include('admin.parts.footer')
 
-    <script src="{{ getAdminAsset('js/vendor/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ getAdminAsset('js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ getAdminAsset('js/vendor/Chart.bundle.min.js') }}"></script>
     <script src="{{ getAdminAsset('js/vendor/chartjs-plugin-datalabels.js') }}"></script>
