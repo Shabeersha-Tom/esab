@@ -77,6 +77,11 @@ class CertificateController extends Controller
         return view('admin.certificates.uploadauto');
     }
 
+    public function uploadAuto(Request $request)
+    {
+        dd($request);
+    }
+
     public function uploadManualView()
     {
         return view('admin.certificates.uploadmanual');

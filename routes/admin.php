@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Certificates\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\ProfileController;
+use App\Http\Controllers\Admin\Users\RolesController;
+use App\Http\Controllers\Admin\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +41,7 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::get('/search', [CertificateController::class, 'searchView'])->name('search');
                 Route::post('/search', [CertificateController::class, 'searchResult']);
 
+                Route::post('/upload-file', [CertificateController::class, 'uploadFile'])->name('uploadFile');
 
                 Route::get('/upload-auto', [CertificateController::class, 'uploadAutoView'])->name('uploadauto');
                 Route::post('/upload-auto', [CertificateController::class, 'uploadAuto']);
@@ -49,6 +52,7 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
 
             // All Users 
             Route::resource('users', UserController::class);
+            Route::resource('roles', RolesController::class);
 
             // Logged-in user profile
             Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

@@ -18,8 +18,8 @@ class BouncerSeeder extends Seeder
     public function run()
     {
         // $admin = Bouncer::role()->firstOrCreate([
-        //     'name' => 'superadmin',
-        //     'title' => 'Super Admin',
+        //     'name' => 'manager',
+        //     'title' => 'manager',
         // ]);
 
         // Bouncer::allow('superadmin')->everything();
@@ -39,6 +39,10 @@ class BouncerSeeder extends Seeder
         $ban = Bouncer::ability()->firstOrCreate([
             'name' => 'admin-role-edit',
             'title' => 'Edit Admin Role',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'admin-role-delete',
+            'title' => 'Edit Admin Delete',
         ]);
 
 
