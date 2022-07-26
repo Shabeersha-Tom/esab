@@ -135,6 +135,8 @@ class RolesController extends Controller
             }
         }
 
+        Bouncer::refresh();
+
         return redirect()->route('admin.roles.index')->with('status', 'Role updated successfully');
     }
 
@@ -152,5 +154,8 @@ class RolesController extends Controller
         }
         Bouncer::sync($role)->abilities([]);
         $role->delete();
+
+        Bouncer::refresh();
+        return redirect()->route('admin.roles.index')->with('status', 'Role deleted successfully');
     }
 }

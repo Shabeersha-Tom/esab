@@ -14,12 +14,12 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            if (Auth::user()->cannot('manage-users')) {
-                abort(403);
-            }
-            return $next($request);
-        });
+        // $this->middleware(function ($request, $next) {
+        //     if (Auth::user()->cannot('manage-users')) {
+        //         abort(403);
+        //     }
+        //     return $next($request);
+        // });
     }
 
     /**
@@ -30,7 +30,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('roles')->get();
-        // dd($users);
         return view('admin.users.index')->with([
             'users' => $users
         ]);
@@ -44,11 +43,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Bouncer::role()->all();
-        $abilities = Bouncer::ability()->all();
         return view('admin.users.create')
             ->with([
                 'roles' => $roles,
-                'abilities' => $abilities
             ]);
     }
 
@@ -60,24 +57,19 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'type' => 'backend',
             'status' => $request->status
         ]);
 
-        $user->assign($request->role);
-
-        foreach ($request->ability as $ability) {
-            $user->allow($ability);
+        if ($request->role) {
+            $user->assign($request->role);
         }
 
         Bouncer::refresh();
-
-        return redirect()->route('users.index')->with('status', 'User Created');
+        return redirect()->route('admin.users.index')->with('status', 'User Created');
     }
 
     /**
@@ -100,19 +92,12 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Bouncer::role()->all();
-        $abilities = Bouncer::ability()->all();
-
-
         $userRoles = $user->getRoles()->toArray();
-        $userAbilities = $user->getAbilities()->pluck('id')->toArray();
-
         return view('admin.users.edit')
             ->with([
                 'user' => $user,
                 'roles' => $roles,
-                'abilities' => $abilities,
                 'userRoles' => $userRoles,
-                'userAbilities' => $userAbilities,
             ]);
     }
 
@@ -125,7 +110,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -143,14 +127,6 @@ class UserController extends Controller
         }
         $user->assign($request->role);
 
-        // Delete all abilities and assign new ones
-        foreach ($user->abilities as $ability) {
-            $user->disallow($ability->name);
-        }
-        foreach ($request->ability as $ability) {
-            $user->allow($ability);
-        }
-
         Bouncer::refresh();
 
         return back()->with('status', 'User Updated');
@@ -164,11 +140,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $users = User::whereIs('superadmin')->count();
-        if ($users <= 1) {
-            return back()->with('error', 'Sorry the last super admin cannot be deleted.');
-        }
         $user->delete();
-        return redirect()->route('users.index')->with('status', 'User has been deleted.');
+        return back()->with('status', 'User has been deleted.');
     }
 }

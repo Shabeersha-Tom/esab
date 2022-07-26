@@ -27,7 +27,7 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">#No</th>
-                                            <th scope="col" class="w-90 text-center">Role Name</th>
+                                            <th scope="col" class=" text-center">Role Name</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -53,14 +53,15 @@
                                                                         width="20" class="img-fluid" alt="Edit">
                                                                 </a>
                                                             </li>
-                                                            <li>
-                                                                {{-- <img src="{{ getAdminAsset('img/delete.png') }}"
-                                                                    width="20" class="img-fluid" alt="Delete"> --}}
+                                                            <li style="margin-bottom: 5px;">
                                                                 <form action="{{ route('admin.roles.destroy', $role) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <input type="submit" value="Delete">
+                                                                    <button class="p-0 border-0" type="submit">
+                                                                        <img src="{{ getAdminAsset('img/delete.png') }}"
+                                                                            width="22" class="img-fluid" alt="Delete">
+                                                                    </button>
                                                                 </form>
                                                             </li>
                                                         </ul>
@@ -80,3 +81,10 @@
         </div>
     </div>
 @endsection
+@push('header')
+    <style>
+        .action_list {
+            gap: 0;
+        }
+    </style>
+@endpush

@@ -14,7 +14,7 @@
                         Certificates
                     </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.roles*') ? 'active' : '' }}">
+                <li class="{{ request()->routeIs('admin.roles*') | request()->routeIs('admin.users*') ? 'active' : '' }}">
                     <a href="#ui">
                         <i class="iconsminds-air-balloon-1"></i> Admin
                     </a>
@@ -56,13 +56,13 @@
             <ul class="list-unstyled" data-link="ui" id="ui">
                 <div id="collapseAuthorization" class="collapse show">
                     <ul class="list-unstyled inner-level-menu">
-                        <li class="{{ request()->routeIs('admin.roles.index') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('admin.roles*') ? 'active' : '' }}">
                             <a href="{{ route('admin.roles.index') }}">
                                 <i class="simple-icon-doc"></i> <span class="d-inline-block">Admin Roles</span>
                             </a>
                         </li>
-                        <li class="">
-                            <a href="admin_users.html">
+                        <li class="{{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.users.index') }}">
                                 <i class="simple-icon-doc"></i> <span class="d-inline-block active">Admin Users</span>
                             </a>
                         </li>
