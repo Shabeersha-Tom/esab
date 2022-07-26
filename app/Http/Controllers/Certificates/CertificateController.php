@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Certificates;
 
+use App\ImageUpload;
+
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAutoCertificateRequest;
 use App\Models\Certificates\Certificate;
-use App\Http\Requests\StoreCertificateRequest;
-use App\Http\Requests\UpdateCertificateRequest;
+use App\Models\Certificates\CertificateFile;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Searchable\Search;
 use Spatie\Searchable\ModelSearchAspect;
 
@@ -66,8 +70,6 @@ class CertificateController extends Controller
             $q->searchable->load('user');
         });
 
-        // dd($searchResults);
-
         return view('admin.certificates.search-result')
             ->with(['searchResults' => $searchResults]);
     }
@@ -77,9 +79,46 @@ class CertificateController extends Controller
         return view('admin.certificates.uploadauto');
     }
 
-    public function uploadAuto(Request $request)
+    public function uploadFile(Request $request)
     {
-        dd($request);
+
+        $name = uploadImage($request, 'file', 'temp');
+
+        $imageUpload = CertificateFile::create([
+            'path' => $name,
+            'status' => 'draft'
+        ]);
+
+        return response()->json(['success' => $imageUpload->id]);
+    }
+
+    public function uploadAuto(StoreAutoCertificateRequest $request)
+    {
+
+        $file = CertificateFile::find($request->file_id);
+
+        if ($file) {
+            $certificate = Auth::user()->certificate()->create([
+                'certificate_name' => $request->title,
+                'certificate_no' => $request->cer_number,
+                'test' => $request->test,
+                'item_1' => $request->item_1,
+                'item_2' => $request->item_2,
+                'lot_1' => $request->lot_1,
+                'lot_2' => $request->lot_2,
+            ]);
+
+            moveFile($file->path, 'asd');
+
+            $file->update([
+                'status' => 'active',
+                'certificate_no' => $certificate->id
+            ]);
+
+            return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
+        }
+
+        return back()->withErrors('file_error', 'Sorry, something went wrong, please try again');
     }
 
     public function uploadManualView()

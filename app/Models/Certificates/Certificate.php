@@ -14,6 +14,7 @@ class Certificate extends Model implements Searchable
 
     protected $fillable = [
         'user_id',
+        'certificate_name',
         'certificate_no',
         'test',
         'item_1',
@@ -35,5 +36,10 @@ class Certificate extends Model implements Searchable
     function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    function file()
+    {
+        return $this->hasOne(CertificateFile::class, 'certificate_no');
     }
 }
