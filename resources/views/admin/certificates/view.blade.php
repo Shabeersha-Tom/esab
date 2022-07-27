@@ -39,7 +39,7 @@
     </div>
 @endsection
 @push('footer')
-    <script src="{{ getAdminAsset('js/jQuery.print.js') }}"></script>
+    <script src="{{ asset('js/jQuery.print.js') }}"></script>
     <script>
         $(function() {
             $('.print').on('click', function() {
