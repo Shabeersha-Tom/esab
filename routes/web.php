@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [FrontendController::class, 'index']);
-Route::get('/certificate/{slug}', [FrontendController::class, 'certificate']);
+Route::get('/certificate/{slug}', [FrontendController::class, 'certificate'])->name('certificate.view');
 Route::get('/certificate/{certificate:slug}/download', [FrontendController::class, 'download'])->name('certificate.download');
 
 include('admin.php');

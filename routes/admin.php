@@ -70,9 +70,12 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::post('/logout-everywhere', [ProfileController::class, 'logoutEverywhere'])->name('logout-everywhere');
             });
 
-            Route::get('/test', function () {
-                return view('admin.test');
-            })->name('test');
+            Route::get('/test', [CertificateController::class, 'test'])->name('test');
+
+            // Route::get('/test', function () {
+            //     return view('admin.test');
+            // })->name('test');
+
             Route::post('/test', function (Request $request) {
                 dd($request);
             });

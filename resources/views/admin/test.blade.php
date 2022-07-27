@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('content')
-    <img class="w-100" src="{{ getAdminAsset('img/chocolate-cake-thumb.jpg') }}" id="watermarked" />
+    <img class="w-100" src="{{ getAdminAsset('img/certificate.pdf') }}" id="watermarked" />
     {{-- <img class="w-100" src="{{ getAdminAsset('img/certificate.png') }}" id="watermarked" /> --}}
 
     <form method="post" enctype="multipart/form-data" action="{{ route('admin.test') }}">

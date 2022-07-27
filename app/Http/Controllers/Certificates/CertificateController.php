@@ -11,12 +11,20 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Spatie\Searchable\Search;
 use Spatie\Searchable\ModelSearchAspect;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Intervention\Image\ImageManager;
+
 
 class CertificateController extends Controller
 {
+    public function __construct(ImageManager $imageManager)
+    {
+        $this->imageManager = $imageManager;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +59,15 @@ class CertificateController extends Controller
     {
         return view('admin.certificates.search');
     }
+    public function uploadAutoView()
+    {
+        return view('admin.certificates.uploadauto');
+    }
+    public function uploadManualView()
+    {
+        return view('admin.certificates.uploadmanual');
+    }
+
     public function searchResult(Request $request)
     {
         $searchResults = (new Search())
@@ -73,10 +90,6 @@ class CertificateController extends Controller
             ->with(['searchResults' => $searchResults]);
     }
 
-    public function uploadAutoView()
-    {
-        return view('admin.certificates.uploadauto');
-    }
 
     public function uploadFile(Request $request)
     {
@@ -118,15 +131,12 @@ class CertificateController extends Controller
                 'certificate_no' => $certificate->id,
             ]);
 
+            
+
             return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
         }
 
         return back()->withErrors('file_error', 'Sorry, something went wrong, please try again');
-    }
-
-    public function uploadManualView()
-    {
-        return view('admin.certificates.uploadmanual');
     }
 
     public function view(Certificate $certificate)
@@ -134,14 +144,22 @@ class CertificateController extends Controller
         $certificate->load('file');
         return view('admin.certificates.view')->with(['certificate' => $certificate]);
     }
+
     public function download(Certificate $certificate)
     {
         $certificate->load('file');
         return  response()->download(public_path() . $certificate->file->getFile($certificate->certificate_no));
     }
+
     public function print(Certificate $certificate)
     {
         $certificate->load('file');
         return view('admin.certificates.view')->with(['certificate' => $certificate]);
     }
+
+    public function test()
+    {
+       processImage();
+    }
+
 }
