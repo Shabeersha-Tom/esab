@@ -23,6 +23,7 @@ class Certificate extends Model implements Searchable
         'lot_2',
         'views',
         'downloads',
+        'slug',
     ];
 
     public function getSearchResult(): SearchResult

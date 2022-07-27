@@ -30,7 +30,7 @@ function uploadImage(Request $request, $input, $path)
             $filename
         );
 
-        return Storage::url($name);
+        return $filename;
     }
     return null;
 }

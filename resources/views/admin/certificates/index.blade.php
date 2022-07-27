@@ -6,7 +6,7 @@
                 <div class="mb-3 d-flex align-items-center justify-content-between">
                     <h1 class="m-0 p-0">Certificates</h1>
                     <div class="btn_group">
-                        @if ($selected_user || $start_date || $end_date )
+                        @if ($selected_user || $start_date || $end_date)
                             <a href="{{ route('admin.certificates.index') }}" class="btn btn_primary">Clear Filter</a>
                         @endif
                         <a href="#" class="btn btn_secondary mr-2" data-toggle="modal" data-backdrop="static"
@@ -55,7 +55,7 @@
                                             @foreach ($certificates as $certificate)
                                                 <tr>
                                                     <td>
-                                                        <a href="certificate_view.html">
+                                                        <a href="{{ route('admin.certificates.view', $certificate) }}">
                                                             {{ $certificate->certificate_no }}
                                                         </a>
                                                     </td>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\RolesController;
 use App\Http\Controllers\Admin\Users\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,10 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
 
                 Route::get('/upload-manual', [CertificateController::class, 'uploadManualView'])->name('uploadmanual');
                 Route::post('/upload-manual', [CertificateController::class, 'uploadManual']);
+
+                Route::get('/view/{certificate}', [CertificateController::class, 'view'])->name('view');
+                Route::get('/download/{certificate}', [CertificateController::class, 'download'])->name('download');
+                Route::get('/print/{certificate}', [CertificateController::class, 'print'])->name('print');
             });
 
             // All Users 
@@ -63,6 +68,13 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::put('/password-update', [ProfileController::class, 'updatePassword'])->name('password-update');
                 Route::put('/profile-update', [ProfileController::class, 'updateProfile'])->name('profile-update');
                 Route::post('/logout-everywhere', [ProfileController::class, 'logoutEverywhere'])->name('logout-everywhere');
+            });
+
+            Route::get('/test', function () {
+                return view('admin.test');
+            })->name('test');
+            Route::post('/test', function (Request $request) {
+                dd($request);
             });
         });
     });

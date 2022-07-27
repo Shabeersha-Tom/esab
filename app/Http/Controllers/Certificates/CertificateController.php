@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Certificates;
 
-use App\ImageUpload;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAutoCertificateRequest;
 use App\Models\Certificates\Certificate;
@@ -15,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Searchable\Search;
 use Spatie\Searchable\ModelSearchAspect;
+use Illuminate\Support\Str;
 
 class CertificateController extends Controller
 {
@@ -106,13 +105,17 @@ class CertificateController extends Controller
                 'item_2' => $request->item_2,
                 'lot_1' => $request->lot_1,
                 'lot_2' => $request->lot_2,
+                'slug' => Str::uuid()->toString(),
             ]);
 
-            moveFile($file->path, 'asd');
+            $old_path = "/storage/temp/" . $file->path;
+            $new_path = "/public/certificates/" . $request->cer_number . '/' . $file->path;
+
+            moveFile($old_path, $new_path);
 
             $file->update([
                 'status' => 'active',
-                'certificate_no' => $certificate->id
+                'certificate_no' => $certificate->id,
             ]);
 
             return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
@@ -124,5 +127,21 @@ class CertificateController extends Controller
     public function uploadManualView()
     {
         return view('admin.certificates.uploadmanual');
+    }
+
+    public function view(Certificate $certificate)
+    {
+        $certificate->load('file');
+        return view('admin.certificates.view')->with(['certificate' => $certificate]);
+    }
+    public function download(Certificate $certificate)
+    {
+        $certificate->load('file');
+        return  response()->download(public_path() . $certificate->file->getFile($certificate->certificate_no));
+    }
+    public function print(Certificate $certificate)
+    {
+        $certificate->load('file');
+        return view('admin.certificates.view')->with(['certificate' => $certificate]);
     }
 }
