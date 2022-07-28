@@ -16,12 +16,13 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "meyfa/php-svg": "^0.11.3",
+        "setasign/fpdf": "1.8.*",
+        "setasign/fpdi": "^2.0",
         "silber/bouncer": "^1.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-searchable": "^1.11",
-        "wildside/userstamps": "^2.2",
-        "setasign/fpdf": "1.8.*",
-        "setasign/fpdi": "^2.0"
+        "wildside/userstamps": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
