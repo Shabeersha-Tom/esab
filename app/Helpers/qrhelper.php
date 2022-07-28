@@ -25,7 +25,7 @@ function processImage()
 
 
     $time = time();
-    $output_file = '/public/temp/qr-code/img-' . $time . '.svg';
+    $output_file = '/public/temp/qr-code/img-' . $time . '.png';
     Storage::disk('local')->put($output_file, $qrString  );
 
     // $file = SVG::fromFile(storage_path('app/' . $output_file));
