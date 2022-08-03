@@ -172,7 +172,6 @@ class CertificateController extends Controller
             $filename
         );
 
-        dd(URL::to('storage/'.$name));
-
+        dd(Storage::disk('public')->path($name));
     }
 }
