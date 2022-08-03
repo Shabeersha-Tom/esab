@@ -157,9 +157,22 @@ class CertificateController extends Controller
         return view('admin.certificates.view')->with(['certificate' => $certificate]);
     }
 
-    // public function test()
-    // {
-    //    processImage();
-    // }
+    public function testView()
+    {
+        return view('admin.test');
+    }
 
+    public function test(Request $request)
+    {
+        $uploadedFile = $request->file('file');
+        $filename = time() . $uploadedFile->getClientOriginalName();
+        $name = Storage::disk('public')->putFileAs(
+            'files/' . $filename,
+            $uploadedFile,
+            $filename
+        );
+
+        dd(URL::to('storage/'.$name));
+
+    }
 }

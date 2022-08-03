@@ -1,11 +1,16 @@
 @extends('admin.layouts.admin')
 @section('content')
+    <img class="w-100" src="{{ getAdminAsset('img/certificate.pdf') }}" id="watermarked" />
     {{-- <img class="w-100" src="{{ getAdminAsset('img/certificate.png') }}" id="watermarked" /> --}}
 
     <form method="post" enctype="multipart/form-data" action="{{ route('admin.test') }}">
         @csrf
-        <input type="file" name="file" id="">
-        <input type="submit" value="Submit">
+        <input type="hidden" id="x" name="x" value="" />
+        <input type="hidden" id="y" name="y" value="" />
+        <input type="hidden" id="w" name="w" value="" />
+        <input type="hidden" id="h" name="h" value="" />
+        <input type="hidden" id="a" name="a" value="" />
+        <input type="submit" name="save" value="Ok" />
     </form>
 @endsection
 @push('header')
