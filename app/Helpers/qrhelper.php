@@ -43,7 +43,7 @@ function processImage(Certificate $certificate, CertificateFile $file)
 
 function generateQRCode($slug, $time)
 {
-    $output_file = '/public/qr-code/img-' . $time . '.png';
+    $output_file = '/storage/qr-code/img-' . $time . '.png';
     // $certificate = Certificate::whereSlug($string)->firstOrFail();
     $url = URL::to(route('certificate.view', $slug));
     $qrString = QrCode::size(300)->format('png')->generate($url);
