@@ -35,6 +35,7 @@ function processImage(Certificate $certificate, CertificateFile $file)
     $time = time();
     $qr = generateQRCode($certificate->slug, $time);
     dd($qr);
+    dd($qr);
     $cerificate_image = $file->getFile($certificate->certificate_no);
     $merged_image = mergeImages($qr, $cerificate_image, $file->path);
     dd($merged_image);
