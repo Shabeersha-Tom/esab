@@ -46,7 +46,8 @@ function generateQRCode($slug, $time)
     // $certificate = Certificate::whereSlug($string)->firstOrFail();
     $url = URL::to(route('certificate.view', $slug));
     $qrString = QrCode::size(300)->format('png')->generate($url);
-    return Storage::disk('local')->put($output_file, $qrString);
+    Storage::disk('local')->put($output_file, $qrString);
+    return URL::to($output_file);
 }
 
 function mergeImages($qr, $cerificate, $name)
