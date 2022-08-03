@@ -34,13 +34,14 @@ function processImage(Certificate $certificate, CertificateFile $file)
 {
     $time = time();
     $output_file = '/public/qr-code/img-' . $time . '.png';
-    $qr = generateQRCode($certificate->slug, $time);
+
+    $qr = generateQRCode($certificate->slug, $output_file);
     $cerificate_image = $file->getFile($certificate->certificate_no);
     $merged_image = mergeImages($qr, $cerificate_image, $file->path);
     dd($merged_image);
 }
 
-function generateQRCode($string, $time)
+function generateQRCode($string, $output_file)
 {
     $certificate = Certificate::whereSlug($string)->firstOrFail();
     $url = URL::to(route('certificate.view', $string));
