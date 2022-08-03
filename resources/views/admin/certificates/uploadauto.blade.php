@@ -139,7 +139,7 @@
                     var time = dt.getTime();
                     return time + file.name;
                 },
-                acceptedFiles: ".jpeg,.jpg,.png,.webp",
+                acceptedFiles: ".pdf",
                 maxFiles: 1,
                 addRemoveLinks: true,
                 thumbnailWidth: 160,

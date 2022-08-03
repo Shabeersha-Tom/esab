@@ -20,7 +20,6 @@ use setasign\Fpdi\Fpdi;
 
 
 
-//     
 //     // $image = Image::make(storage_path('app/' . $output_file));
 //     // dd($image);
 //     // Storage::disk('local')->put($output_file, $image);

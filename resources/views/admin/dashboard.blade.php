@@ -18,7 +18,7 @@
                                     <b>Number of <br />
                                         Users</b>
                                 </p>
-                                <p class="lead text-center">32</p>
+                                <p class="lead text-center">{{ $usersCount }}</p>
                             </div>
                         </a>
                     </div>
@@ -31,7 +31,7 @@
                                     <b>Number Of <br />
                                         Certificates</b>
                                 </p>
-                                <p class="lead text-center">16</p>
+                                <p class="lead text-center">{{ $certificatesCount }}</p>
                             </div>
                         </a>
                     </div>
@@ -45,7 +45,7 @@
                                     <b>Number of Downloaded <br />
                                         Certificates</b>
                                 </p>
-                                <p class="lead text-center">28</p>
+                                <p class="lead text-center">{{ $certificatesDownloadCount  }}</p>
                             </div>
                         </a>
                     </div>
@@ -58,7 +58,7 @@
                                     <b>Number of Viewed <br />
                                         Certificates</b>
                                 </p>
-                                <p class="lead text-center">45</p>
+                                <p class="lead text-center">{{ $certificatesViewCount }}</p>
                             </div>
                         </a>
                     </div>
@@ -77,5 +77,5 @@
                 </div>
             </div>
         </div>
-        </div>
-    @endsection
+    </div>
+@endsection

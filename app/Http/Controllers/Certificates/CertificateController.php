@@ -131,7 +131,7 @@ class CertificateController extends Controller
                 'certificate_no' => $certificate->id,
             ]);
 
-            
+            processImage($certificate, $file);
 
             return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
         }
@@ -157,9 +157,9 @@ class CertificateController extends Controller
         return view('admin.certificates.view')->with(['certificate' => $certificate]);
     }
 
-    public function test()
-    {
-       processImage();
-    }
+    // public function test()
+    // {
+    //    processImage();
+    // }
 
 }
