@@ -16,6 +16,15 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
+    
+    <style>
+        .iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+        }
+    </style>
+    
 </head>
 
 <body class="background show-spinner no-footer rounded">
@@ -45,9 +54,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="certificate_card  border ">
-                                    <img id="printable"
-                                        src="{{ $certificate->file->getFile($certificate->certificate_no) }}"
-                                        class="img-fluid rounded-start" alt="">
+                                    <!--<img id="printable"-->
+                                    <!--    src="{{ $certificate->file->getFile($certificate->certificate_no) }}"-->
+                                    <!--    class="img-fluid rounded-start" alt="">-->
+                                        <iframe class="iframe" src="https://docs.google.com/gview?url={{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}&embedded=true"
+                            frameborder="0"></iframe>
+                            
+                            <!--<object data="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}" type="application/pdf" frameborder="0" width="100%" height="600px" style="padding: 20px;">-->
+                            <!--    <embed src="https://drive.google.com/file/d/1CRFdbp6uBDE-YKJFaqRm4uy9Z4wgMS7H/preview?usp=sharing" width="100%" height="600px"/> -->
+                            <!--</object>-->
+                            
                                 </div>
                             </div>
                             <div class="col-md-6">
