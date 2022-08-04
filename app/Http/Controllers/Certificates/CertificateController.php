@@ -79,8 +79,7 @@ class CertificateController extends Controller
                 'item_2',
                 'lot_1',
                 'lot_2',
-            )
-            ->search($request->q);
+            )->search($request->q);
 
         $searchResults->each(function ($q) {
             $q->searchable->load('user');
@@ -131,7 +130,7 @@ class CertificateController extends Controller
                 'certificate_no' => $certificate->id,
             ]);
 
-            processImage($certificate, $file);
+            // processImage($certificate, $file);
 
             return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
         }

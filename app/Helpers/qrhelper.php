@@ -34,7 +34,7 @@ function processImage(Certificate $certificate, CertificateFile $file)
 {
     $time = time();
     $qr = generateQRCode($certificate->slug, $time);
-    $cerificate_image = $file->getFile($certificate->certificate_no);
+    $cerificate_image = $file->getFilePath($certificate->certificate_no);
     $merged_image = mergeImages($qr, $cerificate_image, $file->path);
     dd($merged_image);
 }
@@ -52,7 +52,15 @@ function generateQRCode($slug, $time)
 
 function mergeImages($qr, $cerificate, $name)
 {
-    $imageManager = new ImageManager();
-    $img_canvas = $imageManager->canvas(800, 400);
-    return Image::make($qr);
+    $pdf = new Fpdi();
+    $pdf->AddPage();
+    $pdf->setSourceFile($cerificate);
+    $tplId = $pdf->importPage(1);
+    $pdf->useTemplate($tplId);
+    $pdf->Image($qr, 0, 0, 0, 0);
+    dd($pdf->Output());
+    
+    // $imageManager = new ImageManager();
+    // $img_canvas = $imageManager->canvas(800, 400);
+    // return Image::make($qr);
 }

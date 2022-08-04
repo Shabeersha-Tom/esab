@@ -22,6 +22,11 @@ class CertificateFile extends Model
         return $this->belongsTo(Certificate::class, 'certificate_no');
     }
 
+    public function getFilePath($id)
+    {
+        return Storage::disk('public')->path("certificates/" . $id . '/' . $this->path);
+    }
+
     public function getFile($id)
     {
         return Storage::url("certificates/" . $id . '/' . $this->path);
