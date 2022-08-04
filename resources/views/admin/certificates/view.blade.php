@@ -30,14 +30,25 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <img id="printable" src="{{ $certificate->file->getFile($certificate->certificate_no) }}"
-                            class="img-fluid" alt="">
+                        <iframe class="iframe" src="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}"
+                            frameborder="0"></iframe>
+                        {{-- <img id="printable" src="{{ $certificate->file->getFile($certificate->certificate_no) }}"
+                            class="img-fluid" alt=""> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('header')
+    <style>
+        .iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+        }
+    </style>
+@endpush
 @push('footer')
     <script src="{{ asset('js/jQuery.print.js') }}"></script>
     <script>
