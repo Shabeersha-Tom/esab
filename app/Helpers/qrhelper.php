@@ -61,7 +61,7 @@ function mergeImages($qr, $cerificate, $name, $position)
 
 function cleanFiles($time)
 {
-    $output_file = storage_path('qr-code/img-' . $time . '.png');
+    $output_file = "public/qr-code/img-". $time .".png";
     if (Storage::exists($output_file)) {
         Storage::delete($output_file);
     } else {
