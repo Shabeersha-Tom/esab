@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Certificates;
 
+use App\Exports\CertificateExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAutoCertificateRequest;
 use App\Models\Certificates\Certificate;
@@ -17,6 +18,7 @@ use Spatie\Searchable\ModelSearchAspect;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManager;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class CertificateController extends Controller
@@ -161,6 +163,12 @@ class CertificateController extends Controller
         return view('admin.test');
     }
 
+    public function export()
+    {
+        $name = "Certificate Export " . time() . '.xlsx';
+        return Excel::download(new CertificateExport, $name);
+    }
+
     public function test(Request $request)
     {
         $uploadedFile = $request->file('file');
@@ -170,7 +178,7 @@ class CertificateController extends Controller
             $uploadedFile,
             $filename
         );
-        dd(URL::to('storage/'.$name));
+        dd(URL::to('storage/' . $name));
         // dd(Storage::disk('public')->path($name));
     }
 }

@@ -182,7 +182,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -240,7 +242,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
     ],

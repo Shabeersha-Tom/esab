@@ -11,7 +11,10 @@
                         @endif
                         <a href="#" class="btn btn_secondary mr-2" data-toggle="modal" data-backdrop="static"
                             data-target="#exampleModalRight">Filter</a>
-                        <a href="#" class="btn btn_primary">Export Excel</a>
+                        <form class="d-inline" action="{{ route('admin.certificates.export') }}" method="POST">
+                            @csrf
+                            <input type="submit" value="Export Excel" class="btn btn_primary">
+                        </form>
                     </div>
                 </div>
 
