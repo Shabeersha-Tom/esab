@@ -99,6 +99,7 @@
                                     </p>
                                 @endif
                             </div>
+                            {{ $certificates->links() }}
                         </div>
                     </div>
                 </div>

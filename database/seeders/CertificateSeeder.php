@@ -13,6 +13,7 @@ class CertificateSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // php artisan db:seed --class=CertificateSeeder
+        \App\Models\Certificates\Certificate::factory(10000)->create();
     }
 }

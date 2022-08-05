@@ -46,7 +46,7 @@ class CertificateController extends Controller
                 $query->where('created_at', '>=', Carbon::parse($request->start_date)->startOfDay());
             }
         }
-        $certificates = $query->get();
+        $certificates = $query->paginate(50)->withQueryString();
         return view('admin.certificates.index')
             ->with([
                 'users' => $users,

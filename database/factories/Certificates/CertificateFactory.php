@@ -3,6 +3,7 @@
 namespace Database\Factories\Certificates;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CertificateFactory extends Factory
 {
@@ -14,7 +15,17 @@ class CertificateFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => 1,
+            'certificate_name' => Str::random(5),
+            'certificate_no' => $this->faker->unique()->randomNumber(),
+            'test' => Str::random(3),
+            'item_1' => Str::random(3),
+            'item_2' => Str::random(3),
+            'lot_1' => Str::random(3),
+            'lot_2' => Str::random(3),
+            'views' => $this->faker->randomDigit(),
+            'downloads' => $this->faker->randomDigit(),
+            'slug' => $this->faker->unique()->uuid(),
         ];
     }
 }
