@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('content')
-    <img class="w-100" src="{{ $image_path }}" id="watermarked" />
+    <img style="width:1240px;height:1754px;" src="{{ $image_path }}" id="watermarked" />
     <form method="post" enctype="multipart/form-data" action="{{ route('admin.certificates.placeQr') }}">
         @csrf
         <input type="hidden" name="certificate_id" value="{{ $certificate_id }}" />
@@ -25,8 +25,8 @@
             $('#watermarked').Watermarker({
                 watermark_img: "{{ getAdminAsset('img/qr_sample.jpg') }}",
                 onChange: showCoords,
-                w: '240px',
-                h: '240px',
+                w: '150px',
+                h: '150px',
                 y: 0,
                 x: 0,
             });

@@ -10,6 +10,7 @@ use setasign\Fpdi\Fpdi;
 use Illuminate\Support\Str;
 use Spatie\PdfToImage\Pdf;
 
+use Illuminate\Support\Facades\Log;
 
 function processManualUpload(Certificate $certificate, CertificateFile $file)
 {
@@ -38,17 +39,22 @@ function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
 {
     $time = time();
     $pdf = new Fpdi();
-    $pdf->AddPage();
     $pdf->setSourceFile($cerificate);
     $tplId = $pdf->importPage(1);
-    $pdf->useTemplate($tplId);
-
+    $size = $pdf->getTemplateSize($tplId);
+    // $pdf->AddPage('P','A4');
+    $pdf->AddPage();
+    $pdf->SetMargins(0,0,0);
+    $pdf->SetXY(0,0);
+    $pdf->SetCompression(false);
+    $pdf->useTemplate($tplId, null, null, $size['width'], $size['height'], FALSE);
     $x = 0;
     $y = 0;
 
     if ($position ==  'manual') {
         $x = $xLoc;
         $y = $yLoc;
+        Log::debug('x,y after convert : ' . $x . '--' . $y);
     } else if ($position == 'top_left' || $position == 'top_right') {
         $x = 145;
         $y = 30;
@@ -60,7 +66,7 @@ function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
         $y = 245;
     }
 
-    $pdf->Image($qr, $x, $y, 0, 0);
+    $pdf->Image($qr, $x, $y);
     $pdf->Output('F', $cerificate);
 }
 
@@ -79,6 +85,7 @@ function convertPdfToImage(Certificate $certificate, CertificateFile $file)
     $fileName = basename($file->path, '.pdf') . '.jpg';
     $image_path = storage_path('app/public/pdfImages/' . $certificate->certificate_no . $fileName);
     $pdf = new Pdf($file->getFilePath($certificate->certificate_no));
+    $pdf->setResolution(300);
     $pdf->saveImage($image_path);
     return URL::to('storage/pdfImages/' . $certificate->certificate_no . $fileName);
 }

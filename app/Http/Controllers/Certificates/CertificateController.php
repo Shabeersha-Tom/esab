@@ -20,7 +20,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManager;
 use Maatwebsite\Excel\Facades\Excel;
 
-
+use Illuminate\Support\Facades\Log;
 
 
 class CertificateController extends Controller
@@ -176,9 +176,20 @@ class CertificateController extends Controller
 
     public function placeQr(Request $request)
     {
+        // $x = $request->x;
+        // $y = $request->y;
+        
+        Log::debug('x,y from request : ' . $request->x . '--' . $request->y);
+        
+        $x = $request->x / 5.9;
+        $y = $request->y / 5.9;
+        
+        Log::debug('x,y after convert : ' . $x . '--' . $y);
+        
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
-        processAutoUpload($certificate, $file, "manual", $request->x, $request->y);
+        processAutoUpload($certificate, $file, "manual", $x, $y);
+        return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
     }
 
 
