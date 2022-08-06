@@ -171,14 +171,19 @@ class CertificateController extends Controller
 
     public function test(Request $request)
     {
-        $uploadedFile = $request->file('file');
-        $filename = time() . $uploadedFile->getClientOriginalName();
-        $name = Storage::disk('public')->putFileAs(
-            'files/' . $filename,
-            $uploadedFile,
-            $filename
-        );
-        dd(URL::to('storage/' . $name));
+
+        $pdf = new Spatie\PdfToImage\Pdf( getAdminAsset('img/certificate.pdf') );
+        dd($pdf);
+
+
+        // $uploadedFile = $request->file('file');
+        // $filename = time() . $uploadedFile->getClientOriginalName();
+        // $name = Storage::disk('public')->putFileAs(
+        //     'files/' . $filename,
+        //     $uploadedFile,
+        //     $filename
+        // );
+        // dd(URL::to('storage/' . $name));
         // dd(Storage::disk('public')->path($name));
     }
 }
