@@ -16,15 +16,21 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
-    
+
     <style>
         .iframe {
             width: 100%;
             height: 700px;
             border: none;
         }
+
+        #the-canvas {
+            border: 1px solid black;
+            direction: ltr;
+            width: 100%;
+        }
     </style>
-    
+
 </head>
 
 <body class="background show-spinner no-footer rounded">
@@ -54,16 +60,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="certificate_card  border ">
-                                    <!--<img id="printable"-->
-                                    <!--    src="{{ $certificate->file->getFile($certificate->certificate_no) }}"-->
-                                    <!--    class="img-fluid rounded-start" alt="">-->
-                                        <iframe class="iframe" src="https://docs.google.com/gview?url={{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}&embedded=true"
-                            frameborder="0"></iframe>
-                            
-                            <!--<object data="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}" type="application/pdf" frameborder="0" width="100%" height="600px" style="padding: 20px;">-->
-                            <!--    <embed src="https://drive.google.com/file/d/1CRFdbp6uBDE-YKJFaqRm4uy9Z4wgMS7H/preview?usp=sharing" width="100%" height="600px"/> -->
-                            <!--</object>-->
-                            
+                                    <canvas id="the-canvas"></canvas>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -94,6 +91,55 @@
             });
         });
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.min.js"
+        integrity="sha512-xzh64kBm/sNMH3yE0yfg/V6gl1uzZ6oJCAC14KTY9ORUZzUVe2B/GJYlpmV2J2vrpbheZaeqHIw3XzOePOjx6Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        var url = '{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}';
+
+        var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+        // The workerSrc property shall be specified.
+        // pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+        var loadingTask = pdfjsLib.getDocument(url);
+        loadingTask.promise.then(function(pdf) {
+            console.log('PDF loaded');
+
+            // Fetch the first page
+            var pageNumber = 1;
+            pdf.getPage(pageNumber).then(function(page) {
+                console.log('Page loaded');
+
+                var scale = 1.5;
+                var viewport = page.getViewport({
+                    scale: scale
+                });
+
+                // Prepare canvas using PDF page dimensions
+                var canvas = document.getElementById('the-canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Render PDF page into canvas context
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+                renderTask.promise.then(function() {
+                    console.log('Page rendered');
+                });
+            });
+        }, function(reason) {
+            // PDF loading error
+            console.error(reason);
+        });
+    </script>
+
 </body>
 
 </html>
