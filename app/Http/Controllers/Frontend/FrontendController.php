@@ -16,11 +16,17 @@ class FrontendController extends Controller
     public function certificate($slug)
     {
         $certificate = Certificate::with('file')->whereSlug($slug)->firstOrFail();
+        $certificate->update([
+            'views' => $certificate->views++
+        ]);
         return view('frontend.view')->with(['certificate' => $certificate]);
     }
     public function download($slug)
     {
         $certificate = Certificate::with('file')->whereSlug($slug)->firstOrFail();
+        $certificate->update([
+            'downloads' => $certificate->downloads++
+        ]);
         return  response()->download(public_path() . $certificate->file->getFile($certificate->certificate_no));
     }
 }
