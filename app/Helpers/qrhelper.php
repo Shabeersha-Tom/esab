@@ -78,7 +78,7 @@ function cleanFiles($time)
 function convertPdfToImage(Certificate $certificate, CertificateFile $file)
 {
     $fileName = basename($file->path, '.pdf') . '.jpg';
-    $image_path = public_path($certificate->certificate_no . '/' . $fileName);
+    $image_path = public_path('pdfImages/' . $certificate->certificate_no . $fileName);
     $pdf = new Pdf($file->getFilePath($certificate->certificate_no));
     $pdf->saveImage($image_path);
     return $image_path;
