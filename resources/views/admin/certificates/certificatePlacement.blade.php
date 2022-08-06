@@ -10,7 +10,7 @@
         <input type="hidden" id="w" name="w" value="" />
         <input type="hidden" id="h" name="h" value="" />
         <input type="hidden" id="a" name="a" value="" />
-        <input type="submit" class="btn btn_primary mt-2" name="save" value="Ok" />
+        <input type="submit" class="btn btn_primary mt-2" name="save" value="Submit" />
     </form>
 @endsection
 @push('header')
