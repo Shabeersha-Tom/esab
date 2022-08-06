@@ -153,6 +153,7 @@ class CertificateController extends Controller
 
             return redirect()->route('admin.certificates.placeQr')->with([
                 'image_path' => $certificateImage,
+                'file_id' => $request->file_id,
                 'certificate_id' => $certificate->id
             ]);
 
@@ -168,13 +169,16 @@ class CertificateController extends Controller
     {
         return view('admin.certificates.certificatePlacement')->with([
             'image_path' => session('image_path'),
-            'certificate_id' => session('certificate_id')
+            'file_id' => session('file_id'),
+            'certificate_id' => session('certificate_id'),
         ]);
     }
 
     public function placeQr(Request $request)
     {
-        dd($request);
+        $file = CertificateFile::find($request->file_id);
+        $certificate = Certificate::find($request->certificate_id);
+        processAutoUpload($certificate, $file, "manual", $request->x, $request->y);
     }
 
 

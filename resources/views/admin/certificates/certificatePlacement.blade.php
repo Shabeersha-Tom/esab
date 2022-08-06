@@ -4,6 +4,7 @@
     <form method="post" enctype="multipart/form-data" action="{{ route('admin.certificates.placeQr') }}">
         @csrf
         <input type="hidden" name="certificate_id" value="{{ $certificate_id }}" />
+        <input type="hidden" name="file_id" value="{{ $file_id }}" />
         <input type="hidden" id="x" name="x" value="" />
         <input type="hidden" id="y" name="y" value="" />
         <input type="hidden" id="w" name="w" value="" />

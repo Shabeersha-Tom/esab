@@ -15,12 +15,12 @@ function processManualUpload(Certificate $certificate, CertificateFile $file)
 {
 }
 
-function processAutoUpload(Certificate $certificate, CertificateFile $file, $position)
+function processAutoUpload(Certificate $certificate, CertificateFile $file, $position, $x = 0, $y = 0)
 {
     $time = time();
     $qr = generateQRCode($certificate->slug, $time);
     $cerificate_image = $file->getFilePath($certificate->certificate_no);
-    mergeImages($qr, $cerificate_image, $file->path, $position);
+    mergeImages($qr, $cerificate_image, $file->path, $position, $x, $y);
     cleanFiles($time);
     return true;
 }
@@ -34,7 +34,7 @@ function generateQRCode($slug, $time)
     return  Storage::disk('public')->path($output_file);
 }
 
-function mergeImages($qr, $cerificate, $name, $position)
+function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
 {
     $time = time();
     $pdf = new Fpdi();
@@ -46,7 +46,10 @@ function mergeImages($qr, $cerificate, $name, $position)
     $x = 0;
     $y = 0;
 
-    if ($position == 'top_left' || $position == 'top_right') {
+    if ($position ==  'manual') {
+        $x = $xLoc;
+        $y = $yLoc;
+    } else if ($position == 'top_left' || $position == 'top_right') {
         $x = 145;
         $y = 30;
     } else if ($position == 'bottom_left') {
@@ -59,10 +62,6 @@ function mergeImages($qr, $cerificate, $name, $position)
 
     $pdf->Image($qr, $x, $y, 0, 0);
     $pdf->Output('F', $cerificate);
-
-    // $imageManager = new ImageManager();
-    // $img_canvas = $imageManager->canvas(800, 400);
-    // return Image::make($qr);
 }
 
 function cleanFiles($time)
