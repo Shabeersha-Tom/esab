@@ -149,7 +149,7 @@ class CertificateController extends Controller
             ]);
 
             // Convert pd to image
-            $certificateImage = convertPdfToImage($certificate, $file,);
+            $certificateImage = convertPdfToImage($certificate, $file);
 
             return view('admin.certificates.certificatePlacement')->with([
                 'image_path' => $certificateImage,
@@ -171,6 +171,7 @@ class CertificateController extends Controller
 
     public function placeQr(Request $request)
     {
+        dd($request);
     }
 
 
