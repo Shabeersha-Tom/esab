@@ -1,7 +1,6 @@
 @extends('admin.layouts.admin')
 @section('content')
-    <img class="w-100" src="{{ getAdminAsset('img/certificate.pdf') }}" id="watermarked" />
-    {{-- <img class="w-100" src="{{ getAdminAsset('img/certificate.png') }}" id="watermarked" /> --}}
+    <img class="w-100" src="{{ URL::to('certificate.png') }}" id="watermarked" />
 
     <form method="post" enctype="multipart/form-data" action="{{ route('admin.test') }}">
         @csrf
@@ -23,10 +22,10 @@
         //<!--
         $().ready(function() {
             $('#watermarked').Watermarker({
-                watermark_img: "{{ getAdminAsset('img/cloud-computing.png') }}",
+                watermark_img: "{{ getAdminAsset('img/qr_sample.jpg') }}",
                 onChange: showCoords,
-                w: '120px',
-                h: '120px',
+                w: '240px',
+                h: '240px',
                 y: 0,
                 x: 0,
             });

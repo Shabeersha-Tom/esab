@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManager;
 use Maatwebsite\Excel\Facades\Excel;
-use Spatie\PdfToImage\Pdf;
+
 
 
 
@@ -72,27 +72,6 @@ class CertificateController extends Controller
         return view('admin.certificates.uploadmanual');
     }
 
-    public function searchResult(Request $request)
-    {
-        $searchResults = (new Search())
-            ->registerModel(
-                Certificate::class,
-                'certificate_no',
-                'test',
-                'item_1',
-                'item_2',
-                'lot_1',
-                'lot_2',
-            )->search($request->q);
-
-        $searchResults->each(function ($q) {
-            $q->searchable->load('user');
-        });
-
-        return view('admin.certificates.search-result')
-            ->with(['searchResults' => $searchResults]);
-    }
-
 
     public function uploadFile(Request $request)
     {
@@ -134,13 +113,53 @@ class CertificateController extends Controller
                 'certificate_no' => $certificate->id,
             ]);
 
-            processImage($certificate, $file, $request->position);
+            processAutoUpload($certificate, $file, $request->position);
 
             return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
         }
 
         return back()->withErrors('file_error', 'Sorry, something went wrong, please try again');
     }
+
+    public function uploadManual(Request $request)
+    {
+        $file = CertificateFile::find($request->file_id);
+
+        if ($file) {
+            $certificate = Auth::user()->certificate()->create([
+                'certificate_name' => $request->title,
+                'certificate_no' => $request->cer_number,
+                'test' => $request->test,
+                'item_1' => $request->item_1,
+                'item_2' => $request->item_2,
+                'lot_1' => $request->lot_1,
+                'lot_2' => $request->lot_2,
+                'slug' => Str::uuid()->toString(),
+                'status' => false,
+            ]);
+
+            $old_path = "/storage/temp/" . $file->path;
+            $new_path = "/public/certificates/" . $request->cer_number . '/' . $file->path;
+
+            moveFile($old_path, $new_path);
+
+            $file->update([
+                'status' => 'active',
+                'certificate_no' => $certificate->id,
+            ]);
+
+            // Convert pd to image
+            $certificateImage = convertPdfToImage($certificate, $file,);
+            dd($certificateImage);
+
+            // processManualUpload($certificate, $file);
+
+            return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
+        }
+
+        return back()->withErrors('file_error', 'Sorry, something went wrong, please try again');
+    }
+
 
     public function view(Certificate $certificate)
     {
@@ -171,11 +190,34 @@ class CertificateController extends Controller
         return Excel::download(new CertificateExport, $name);
     }
 
+    public function searchResult(Request $request)
+    {
+        $searchResults = (new Search())
+            ->registerModel(
+                Certificate::class,
+                'certificate_no',
+                'test',
+                'item_1',
+                'item_2',
+                'lot_1',
+                'lot_2',
+            )->search($request->q);
+
+        $searchResults->each(function ($q) {
+            $q->searchable->load('user');
+        });
+
+        return view('admin.certificates.search-result')
+            ->with(['searchResults' => $searchResults]);
+    }
+
     public function test(Request $request)
     {
 
-        $pdf = new Pdf( getAdminAsset('img/certificate.pdf') );
-        $pdf->saveImage( public_path('test.jpg') );
+        dd($request);
+
+        // $pdf = new Pdf(getAdminAsset('img/certificate.pdf'));
+        // $pdf->saveImage(public_path('test.jpg'));
 
 
 

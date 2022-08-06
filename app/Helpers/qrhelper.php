@@ -8,8 +8,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManager;
 use setasign\Fpdi\Fpdi;
 use Illuminate\Support\Str;
+use Spatie\PdfToImage\Pdf;
 
-function processImage(Certificate $certificate, CertificateFile $file, $position)
+
+function processManualUpload(Certificate $certificate, CertificateFile $file)
+{
+}
+
+function processAutoUpload(Certificate $certificate, CertificateFile $file, $position)
 {
     $time = time();
     $qr = generateQRCode($certificate->slug, $time);
@@ -61,10 +67,20 @@ function mergeImages($qr, $cerificate, $name, $position)
 
 function cleanFiles($time)
 {
-    $output_file = "public/qr-code/img-". $time .".png";
+    $output_file = "public/qr-code/img-" . $time . ".png";
     if (Storage::exists($output_file)) {
         Storage::delete($output_file);
     } else {
         dd($output_file);
     }
+}
+
+
+
+function convertPdfToImage(Certificate $certificate, CertificateFile $file)
+{
+    $image_path = public_path($certificate->certificate_no . '/' . $file->path);
+    $pdf = new Pdf($file->getFilePath($certificate->certificate_no));
+    $pdf->saveImage($image_path);
+    return $image_path;
 }

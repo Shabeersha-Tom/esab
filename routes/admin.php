@@ -75,9 +75,9 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
             Route::get('/test', [CertificateController::class, 'testView'])->name('test');
             Route::post('/test', [CertificateController::class, 'test']);
 
-            // Route::get('/test', function () {
-            //     return view('admin.test');
-            // })->name('test');
+            Route::get('/test', function () {
+                return view('admin.test');
+            })->name('test');
 
             // Route::post('/test', function (Request $request) {
             //     dd($request);

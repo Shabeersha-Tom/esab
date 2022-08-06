@@ -24,6 +24,7 @@ class Certificate extends Model implements Searchable
         'views',
         'downloads',
         'slug',
+        'status',
     ];
 
     public function getSearchResult(): SearchResult
