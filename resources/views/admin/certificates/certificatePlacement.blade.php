@@ -1,7 +1,6 @@
 @extends('admin.layouts.admin')
 @section('content')
     <img class="w-100" src="{{ $image_path }}" id="watermarked" />
-
     <form method="post" enctype="multipart/form-data" action="{{ route('admin.certificates.placeQr') }}">
         @csrf
         <input type="hidden" name="certificate_id" value="{{ $certificate_id }}" />

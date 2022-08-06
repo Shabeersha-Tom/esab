@@ -53,8 +53,8 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::get('/upload-manual', [CertificateController::class, 'uploadManualView'])->name('uploadmanual');
                 Route::post('/upload-manual', [CertificateController::class, 'uploadManual']);
 
-                // Route::get('/place-qr', [CertificateController::class, 'placeQrView']);
-                Route::post('/place-qr', [CertificateController::class, 'placeQr'])->name('placeQr');
+                Route::get('/place-qr', [CertificateController::class, 'placeQrView'])->name('placeQr');
+                Route::post('/place-qr', [CertificateController::class, 'placeQr']);
 
                 Route::get('/view/{certificate}', [CertificateController::class, 'view'])->name('view');
                 Route::get('/download/{certificate}', [CertificateController::class, 'download'])->name('download');
@@ -80,8 +80,9 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
             // Route::post('/test', [CertificateController::class, 'test']);
 
             // Route::get('/test', function () {
-            //     return view('admin.certificates.certificatePlacement')->with([
-            //         'image_path' => URL::to('certificate.png')
+            //     return redirect()->route('admin.certificates.placeQr')->with([
+            //         'image_path' => 'aaaa',
+            //         'certificate_id' => "aaaaaas"
             //     ]);
             // })->name('test');
 
