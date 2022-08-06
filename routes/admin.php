@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Users\RolesController;
 use App\Http\Controllers\Admin\Users\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,9 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::get('/upload-manual', [CertificateController::class, 'uploadManualView'])->name('uploadmanual');
                 Route::post('/upload-manual', [CertificateController::class, 'uploadManual']);
 
+                // Route::get('/place-qr', [CertificateController::class, 'placeQrView']);
+                Route::post('/place-qr', [CertificateController::class, 'placeQr'])->name('placeQr');
+
                 Route::get('/view/{certificate}', [CertificateController::class, 'view'])->name('view');
                 Route::get('/download/{certificate}', [CertificateController::class, 'download'])->name('download');
                 Route::get('/print/{certificate}', [CertificateController::class, 'print'])->name('print');
@@ -72,12 +76,14 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::post('/logout-everywhere', [ProfileController::class, 'logoutEverywhere'])->name('logout-everywhere');
             });
 
-            Route::get('/test', [CertificateController::class, 'testView'])->name('test');
-            Route::post('/test', [CertificateController::class, 'test']);
+            // Route::get('/test', [CertificateController::class, 'testView'])->name('test');
+            // Route::post('/test', [CertificateController::class, 'test']);
 
-            Route::get('/test', function () {
-                return view('admin.test');
-            })->name('test');
+            // Route::get('/test', function () {
+            //     return view('admin.certificates.certificatePlacement')->with([
+            //         'image_path' => URL::to('certificate.png')
+            //     ]);
+            // })->name('test');
 
             // Route::post('/test', function (Request $request) {
             //     dd($request);

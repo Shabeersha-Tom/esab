@@ -1,9 +1,10 @@
 @extends('admin.layouts.admin')
 @section('content')
-    <img class="w-100" src="{{ URL::to('certificate.png') }}" id="watermarked" />
+    <img class="w-100" src="{{ $image_path }}" id="watermarked" />
 
     <form method="post" enctype="multipart/form-data" action="{{ route('admin.test') }}">
         @csrf
+        <input type="hidden" name="certificate_id" value="{{ $certificate_id }}" />
         <input type="hidden" id="x" name="x" value="" />
         <input type="hidden" id="y" name="y" value="" />
         <input type="hidden" id="w" name="w" value="" />

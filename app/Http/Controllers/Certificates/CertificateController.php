@@ -150,14 +150,27 @@ class CertificateController extends Controller
 
             // Convert pd to image
             $certificateImage = convertPdfToImage($certificate, $file,);
-            dd($certificateImage);
+
+            return view('admin.certificates.certificatePlacement')->with([
+                'image_path' => $certificateImage,
+                'certificate_id' => $certificate->id
+            ]);
 
             // processManualUpload($certificate, $file);
 
-            return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
+            // return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
         }
 
         return back()->withErrors('file_error', 'Sorry, something went wrong, please try again');
+    }
+
+    // public function placeQrView(Request $request)
+    // {
+    //     dd($request);
+    // }
+
+    public function placeQr(Request $request)
+    {
     }
 
 
