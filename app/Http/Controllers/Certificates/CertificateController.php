@@ -19,6 +19,8 @@ use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManager;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\PdfToImage\Pdf;
+
 
 
 class CertificateController extends Controller
@@ -172,7 +174,7 @@ class CertificateController extends Controller
     public function test(Request $request)
     {
 
-        $pdf = new Spatie\PdfToImage\Pdf( getAdminAsset('img/certificate.pdf') );
+        $pdf = new Pdf( getAdminAsset('img/certificate.pdf') );
         dd($pdf);
 
 
