@@ -175,7 +175,8 @@ class CertificateController extends Controller
     {
 
         $pdf = new Pdf( getAdminAsset('img/certificate.pdf') );
-        dd($pdf);
+        $pdf->saveImage( public_path('test.jpg') );
+
 
 
         // $uploadedFile = $request->file('file');
