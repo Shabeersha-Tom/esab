@@ -41,7 +41,7 @@
     </nav>
     <main>
         <div class="container certificate_viwe_page">
-             <div class="my-3 d-flex align-items-center justify-content-between">
+            <div class="my-3 d-flex align-items-center justify-content-between">
                 <h2 class="pb-0 mb-0">Certificates</h3>
                     <div class="certificate_action ml-auto pr-4">
                         <a href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}" download>
@@ -52,7 +52,7 @@
                             <span> <i class="glyph-icon simple-icon-printer pr-1"></i>Print</span>
                         </a>
                     </div>
-            </div> 
+            </div>
             <div class="separator mb-5"></div>
             <div class="row h-100 mt-2">
                 <div class="col-12 col-xl-12">
@@ -66,11 +66,12 @@
                             <div class="col-md-6">
                                 <div class="data_card">
                                     <p><b>{{ $certificate->certificate_name }} </b></p>
-                                    <p><b>Lot 1: </b> {{ $certificate->lot_1 }}</p>
-                                    <p><b>Lot 2: </b> {{ $certificate->lot_2 }}</p>
-                                    <p><b>Item 1: </b> {{ $certificate->item_1 }}</p>
-                                    <p><b>Item 2: </b> {{ $certificate->item_2 }}</p>
                                     <p><b>Certificate No : </b> {{ $certificate->certificate_no }}</p>
+                                    <p><b>Lot 1: </b> {{ $certificate->lot_1 ?? '-----' }}</p>
+                                    <p><b>Lot 2: </b> {{ $certificate->lot_2 ?? '-----' }}</p>
+                                    <p><b>Item 1: </b> {{ $certificate->item_1 ?? '-----' }}</p>
+                                    <p><b>Item 2: </b> {{ $certificate->item_2 ?? '-----' }}</p>
+
                                 </div>
                             </div>
                         </div>

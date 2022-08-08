@@ -107,11 +107,11 @@
                                     name="ability[certificates-add]" disabled>
                                 <label class="custom-control-label" for="certificate_add">Add</label>
                             </div>
-                            <div class="custom-control custom-checkbox form-check-inline mb-2">
+                            {{-- <div class="custom-control custom-checkbox form-check-inline mb-2">
                                 <input type="checkbox" {{ in_array('certificates-delete', $abilities) ? 'checked' : '' }} class="custom-control-input" id="certificate_delete"
                                     name="ability[certificates-delete]" disabled>
                                 <label class="custom-control-label" for="certificate_delete">Delete</label>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

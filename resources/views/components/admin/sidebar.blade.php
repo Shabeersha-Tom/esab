@@ -2,19 +2,24 @@
     <div class="main-menu">
         <div class="scroll">
             <ul class="list-unstyled">
-                <li class="{{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.dashboard') }}">
-                        <i class="iconsminds-shop-4"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
+
+                @if (auth()->user()->isA('superadmin'))
+                    <li class="{{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.dashboard') }}">
+                            <i class="iconsminds-shop-4"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                @endif
+
                 <li class="{{ request()->routeIs('admin.certificates*') ? 'active' : '' }}">
                     <a href="#layouts">
                         <i class="iconsminds-digital-drawing"></i>
                         Certificates
                     </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.roles*') | request()->routeIs('admin.users*') ? 'active' : '' }}">
+                <li
+                    class="{{ request()->routeIs('admin.roles*') | request()->routeIs('admin.users*') ? 'active' : '' }}">
                     <a href="#ui">
                         <i class="iconsminds-air-balloon-1"></i> Admin
                     </a>
