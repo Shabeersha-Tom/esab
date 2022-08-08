@@ -86,6 +86,14 @@ class CertificateController extends Controller
         return view('admin.certificates.uploadmanual');
     }
 
+    public function checkNumber(Request $request)
+    {
+        $certificate = Certificate::where('certificate_no', $request->cer_number)->first();
+        if ($certificate) {
+            return json_encode(false);
+        }
+        return json_encode(true);
+    }
 
     public function uploadFile(Request $request)
     {
@@ -105,7 +113,6 @@ class CertificateController extends Controller
 
     public function uploadAuto(StoreAutoCertificateRequest $request)
     {
-
         if (!Auth::user()->can('certificates-add')) {
             abort(403);
         }

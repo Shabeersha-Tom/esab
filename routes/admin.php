@@ -47,6 +47,8 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
 
                 Route::post('/upload-file', [CertificateController::class, 'uploadFile'])->name('uploadFile');
 
+                Route::post('/check-number', [CertificateController::class, 'checkNumber'])->name('checkNumber');
+
                 Route::get('/upload-auto', [CertificateController::class, 'uploadAutoView'])->name('uploadauto');
                 Route::post('/upload-auto', [CertificateController::class, 'uploadAuto']);
 

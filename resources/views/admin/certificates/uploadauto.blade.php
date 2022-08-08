@@ -19,7 +19,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">QR Code Position</label>
-                                    <select name="position" class="form-control">
+                                    <select name="position" id="position" class="form-control">
                                         <option {{ old('position') == 'top_left' ? 'selected' : '' }} value="top_left">
                                             Top Left
                                         </option>
@@ -40,14 +40,14 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Certificate Title</label>
-                                    <input type="text" class="form-control" name="title" id="inputEmail4"
+                                    <input type="text" class="form-control" name="title" id="title"
                                         placeholder="Enter title" value="{{ old('name') }}" required />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Certificate Number</label>
-                                    <input type="number" class="form-control" name="cer_number" id="inputEmail4"
+                                    <input type="number" class="form-control" name="cer_number" id="cer_number"
                                         placeholder="Enter number" value="{{ old('cer_number') }}" required />
                                 </div>
                             </div>
@@ -126,6 +126,13 @@
             -o-animation: slide-in 3s ease-in;
             animation: slide-in 3s ease-in;
         }
+
+        label.error {
+            padding: 5px 0;
+            color: #f00;
+            margin: 0;
+            font-size: 15px;
+        }
     </style>
     <script src="{{ getAdminAsset('js/vendor/dropzone.min.js') }}"></script>
     <script>
@@ -161,6 +168,43 @@
 @endpush
 
 @push('footer')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $("#mainForm").validate({
+            rules: {
+                position: {
+                    required: true,
+                },
+                title: {
+                    required: true,
+                },
+                cer_number: {
+                    required: true,
+                    remote: {
+                        url: "{{ route('admin.certificates.checkNumber') }}",
+                        type: "post",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cer_number: function() {
+                                return $("#cer_number").val();
+                            }
+                        },
+                        dataType: 'json'
+                    }
+                },
+            },
+            messages: {
+                position: "Please enter a position",
+                title: "Please enter certificate name",
+                cer_number: {
+                    required: "Please enter certificate number",
+                    remote: "This certificate already exist",
+                },
+            }
+        });
+    </script>
     <script>
         $('#formSubmit').on('click', function() {
             if (!$('#file_id').val()) {
