@@ -3,7 +3,7 @@
         <div class="scroll">
             <ul class="list-unstyled">
 
-                @if (auth()->user()->isA('superadmin'))
+                @if (auth()->user()->can('dashboard'))
                     <li class="{{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}">
                         <a href="{{ route('admin.dashboard') }}">
                             <i class="iconsminds-shop-4"></i>

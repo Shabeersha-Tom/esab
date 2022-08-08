@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
 
-        if (Auth::user()->isNotA('superadmin')) {
+        if (!Auth::user()->can('dashboard')) {
             if (Auth::user()->can('certificates-list')) {
                 return redirect()->route('admin.certificates.index');
             }

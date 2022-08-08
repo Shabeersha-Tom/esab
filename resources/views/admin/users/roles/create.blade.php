@@ -92,6 +92,18 @@
                     </div>
                     <div class="card mb-4">
                         <div class="card-body">
+                            <h5 class="mb-3"><b>Dashboard</b></h5>
+                            <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
+                                <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="ability[dashboard]"
+                                        name="dashboard">
+                                    <label class="custom-control-label" for="dashboard">View Dashboard</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
                             <h5 class="mb-3"><b>Certificates</b></h5>
                             <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
                                 <div class="custom-control custom-checkbox form-check-inline mb-2">
@@ -109,11 +121,11 @@
                                         name="ability[certificates-add]">
                                     <label class="custom-control-label" for="certificate_add">Add</label>
                                 </div>
-                                {{-- <div class="custom-control custom-checkbox form-check-inline mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="certificate_delete"
-                                        name="ability[certificates-delete]">
-                                    <label class="custom-control-label" for="certificate_delete">Delete</label>
-                                </div> --}}
+                                <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="certificates_export"
+                                        name="ability[certificates-export]">
+                                    <label class="custom-control-label" for="certificates_export">Export</label>
+                                </div>
                             </div>
                         </div>
                     </div>
