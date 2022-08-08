@@ -83,6 +83,15 @@ class BouncerSeeder extends Seeder
             'name' => 'certificates-delete',
             'title' => 'Delete Certificate',
         ]);
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'certificates-export',
+            'title' => 'Export Certificate',
+        ]);
+
+        $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'dashboard',
+            'title' => 'Dashboard',
+        ]);
 
         // $user = User::create([
         //     'name' => 'Manager',
