@@ -16,9 +16,8 @@ class FrontendController extends Controller
     public function certificate($slug)
     {
         $certificate = Certificate::with('file')->whereSlug($slug)->firstOrFail();
-        $certificate->update([
-            'views' => $certificate->views++
-        ]);
+        $certificate->views = $certificate->views + 1;
+        $certificate->save();
         return view('frontend.view')->with(['certificate' => $certificate]);
     }
     public function download($slug)
