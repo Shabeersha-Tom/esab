@@ -10,7 +10,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        dd("Home Page");
+        return redirect()->route('login');
     }
 
     public function certificate($slug)
