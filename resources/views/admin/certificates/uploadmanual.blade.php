@@ -65,6 +65,11 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary" role="progressbar" id="dz-uploadprogress">
+                                <span class="progress-text"></span>
+                            </div>
+                        </div>
                         <div class="dropzone dz-clickable upload_certificate">
                             <div class="dz-default dz-message">
                                 <span class="glyph-icon simple-icon-cloud-upload d-block"></span>
@@ -138,6 +143,13 @@
                     alert(
                         'There was an error uploading the file, please refresh the page and try again'
                     );
+                },
+                uploadprogress: function(file, progress, bytesSent) {
+                    if (file.previewElement) {
+                        var progressElement = $('#dz-uploadprogress');
+                        $('#dz-uploadprogress').width(progress+'%')
+                        // progressElement.querySelector(".progress-text").textContent = progress + "%";
+                    }
                 }
             });
         });
