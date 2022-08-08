@@ -6,10 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Bouncer;
+use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Database\Role;
 
 class RolesController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware(function ($request, $next) {
+        //     if (!Auth::user()->hasRolesPrivilages()) {
+        //         abort(403);
+        //     }
+        //     return $next($request);
+        // });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +28,9 @@ class RolesController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('admin-role-list')) {
+            abort(403);
+        }
         $roles = Bouncer::role()->all();
         return view('admin.users.roles.index')->with(['roles' => $roles]);
     }
@@ -28,6 +42,9 @@ class RolesController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('admin-role-add')) {
+            abort(403);
+        }
         return view('admin.users.roles.create');
     }
 
@@ -39,6 +56,9 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('admin-role-add')) {
+            abort(403);
+        }
         $request->validate([
             'role_name' => 'required',
         ], [
@@ -76,6 +96,9 @@ class RolesController extends Controller
      */
     public function show(Role $role)
     {
+        if (!Auth::user()->can('admin-role-view')) {
+            abort(403);
+        }
         if ($role->name == 'superadmin') {
             abort(403, 'Sorry you cant view or edit super admin role');
         }
@@ -96,6 +119,9 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
+        if (!Auth::user()->can('admin-role-edit')) {
+            abort(403);
+        }
         if ($role->name == 'superadmin') {
             abort(403, 'Sorry you cant view or edit super admin role');
         }
@@ -117,6 +143,9 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        if (!Auth::user()->can('admin-role-edit')) {
+            abort(403);
+        }
         $request->validate([
             'role_name' => 'required|unique:roles,title,' . $role->id
         ], [
@@ -148,6 +177,9 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
+        if (!Auth::user()->can('admin-role-delete')) {
+            abort(403);
+        }
         $users = User::whereIs($role->name)->get();
         foreach ($users  as $user) {
             $user->retract($role->name);

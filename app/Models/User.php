@@ -47,7 +47,44 @@ class User extends Authenticatable
 
     function certificate()
     {
-        return $this->hasMany(Certificate::class,'user_id');
+        return $this->hasMany(Certificate::class, 'user_id');
     }
 
+    function hasUserPrivilages()
+    {
+        if (
+            $this->can('admin-user-list') ||
+            $this->can('admin-user-view') ||
+            $this->can('admin-user-add') ||
+            $this->can('admin-user-edit') ||
+            $this->can('admin-user-delete')
+        ) {
+            return true;
+        }
+        return false;
+    }
+    function hasRolesPrivilages()
+    {
+        if (
+            $this->can('admin-role-list') ||
+            $this->can('admin-role-view') ||
+            $this->can('admin-role-add') ||
+            $this->can('admin-role-edit') ||
+            $this->can('admin-role-delete')
+        ) {
+            return true;
+        }
+        return false;
+    }
+    function hasCertificatePrivilages()
+    {
+        if (
+            $this->can('certificates-list') ||
+            $this->can('certificates-view') ||
+            $this->can('certificates-add')
+        ) {
+            return true;
+        }
+        return false;
+    }
 }

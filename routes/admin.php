@@ -75,20 +75,6 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::put('/profile-update', [ProfileController::class, 'updateProfile'])->name('profile-update');
                 Route::post('/logout-everywhere', [ProfileController::class, 'logoutEverywhere'])->name('logout-everywhere');
             });
-
-            // Route::get('/test', [CertificateController::class, 'testView'])->name('test');
-            // Route::post('/test', [CertificateController::class, 'test']);
-
-            // Route::get('/test', function () {
-            //     return redirect()->route('admin.certificates.placeQr')->with([
-            //         'image_path' => 'aaaa',
-            //         'certificate_id' => "aaaaaas"
-            //     ]);
-            // })->name('test');
-
-            // Route::post('/test', function (Request $request) {
-            //     dd($request);
-            // });
         });
     });
 });

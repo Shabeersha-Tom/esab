@@ -5,7 +5,10 @@
             <div class="col-12">
                 <div class="mb-3 d-flex align-items-center justify-content-between">
                     <h1 class="pb-0">Admin Users</h1>
-                    <a href="{{ route('admin.users.create') }}" class="btn btn_primary">ADD</a>
+
+                    @if (auth()->user()->can('admin-user-add'))
+                        <a href="{{ route('admin.users.create') }}" class="btn btn_primary">ADD</a>
+                    @endif
                 </div>
 
                 <div class="separator mb-5"></div>
@@ -45,31 +48,38 @@
                                                 <td>
                                                     @if ($user->roles->count() ? $user->isNotA('superadmin') : true)
                                                         <ul class="action_list">
-                                                            <li>
-                                                                <a class="pr-4"
-                                                                    href="{{ route('admin.users.show', $user) }}">
-                                                                    <img src="{{ getAdminAsset('img/view.png') }}"
-                                                                        width="20" class="img-fluid" alt="View">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="pr-4"
-                                                                    href="{{ route('admin.users.edit', $user) }}">
-                                                                    <img src="{{ getAdminAsset('img/pencil.png') }}"
-                                                                        width="20" class="img-fluid" alt="Edit">
-                                                                </a>
-                                                            </li>
-                                                            <li style="margin-bottom: 5px;">
-                                                                <form action="{{ route('admin.users.destroy', $user) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button class="p-0 border-0" type="submit">
-                                                                        <img src="{{ getAdminAsset('img/delete.png') }}"
-                                                                            width="22" class="img-fluid" alt="Delete">
-                                                                    </button>
-                                                                </form>
-                                                            </li>
+                                                            @if (auth()->user()->can('admin-user-view'))
+                                                                <li>
+                                                                    <a class="pr-4"
+                                                                        href="{{ route('admin.users.show', $user) }}">
+                                                                        <img src="{{ getAdminAsset('img/view.png') }}"
+                                                                            width="20" class="img-fluid" alt="View">
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+                                                            @if (auth()->user()->can('admin-user-edit'))
+                                                                <li>
+                                                                    <a class="pr-4"
+                                                                        href="{{ route('admin.users.edit', $user) }}">
+                                                                        <img src="{{ getAdminAsset('img/pencil.png') }}"
+                                                                            width="20" class="img-fluid" alt="Edit">
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+                                                            @if (auth()->user()->can('admin-user-delete'))
+                                                                <li style="margin-bottom: 5px;">
+                                                                    <form action="{{ route('admin.users.destroy', $user) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button class="p-0 border-0" type="submit">
+                                                                            <img src="{{ getAdminAsset('img/delete.png') }}"
+                                                                                width="22" class="img-fluid"
+                                                                                alt="Delete">
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            @endif
                                                         </ul>
                                                     @endif
                                                 </td>

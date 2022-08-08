@@ -5,7 +5,9 @@
             <div class="col-12">
                 <div class="mb-3 d-flex align-items-center justify-content-between">
                     <h1 class="pb-0">Admin Roles</h1>
-                    <a href="{{ route('admin.roles.create') }}" class="btn btn_primary">Add</a>
+                    @if (auth()->user()->can('admin-role-add'))
+                        <a href="{{ route('admin.roles.create') }}" class="btn btn_primary">Add</a>
+                    @endif
                 </div>
                 <div class="separator mb-5"></div>
             </div>
@@ -39,31 +41,40 @@
                                                 <td>
                                                     @if ($role->name !== 'superadmin')
                                                         <ul class="action_list">
-                                                            <li>
-                                                                <a class="pr-4"
-                                                                    href="{{ route('admin.roles.show', $role) }}">
-                                                                    <img src="{{ getAdminAsset('img/view.png') }}"
-                                                                        width="20" class="img-fluid" alt="View">
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="pr-4"
-                                                                    href="{{ route('admin.roles.edit', $role) }}">
-                                                                    <img src="{{ getAdminAsset('img/pencil.png') }}"
-                                                                        width="20" class="img-fluid" alt="Edit">
-                                                                </a>
-                                                            </li>
-                                                            <li style="margin-bottom: 5px;">
-                                                                <form action="{{ route('admin.roles.destroy', $role) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button class="p-0 border-0" type="submit">
-                                                                        <img src="{{ getAdminAsset('img/delete.png') }}"
-                                                                            width="22" class="img-fluid" alt="Delete">
-                                                                    </button>
-                                                                </form>
-                                                            </li>
+                                                            @if (auth()->user()->can('admin-role-show'))
+                                                                <li>
+                                                                    <a class="pr-4"
+                                                                        href="{{ route('admin.roles.show', $role) }}">
+                                                                        <img src="{{ getAdminAsset('img/view.png') }}"
+                                                                            width="20" class="img-fluid" alt="View">
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+
+                                                            @if (auth()->user()->can('admin-role-edit'))
+                                                                <li>
+                                                                    <a class="pr-4"
+                                                                        href="{{ route('admin.roles.edit', $role) }}">
+                                                                        <img src="{{ getAdminAsset('img/pencil.png') }}"
+                                                                            width="20" class="img-fluid" alt="Edit">
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+
+                                                            @if (auth()->user()->can('admin-role-delete'))
+                                                                <li style="margin-bottom: 5px;">
+                                                                    <form action="{{ route('admin.roles.destroy', $role) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button class="p-0 border-0" type="submit">
+                                                                            <img src="{{ getAdminAsset('img/delete.png') }}"
+                                                                                width="22" class="img-fluid"
+                                                                                alt="Delete">
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            @endif
                                                         </ul>
                                                     @endif
                                                 </td>

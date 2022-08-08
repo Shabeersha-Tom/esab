@@ -36,8 +36,16 @@ class CertificateController extends Controller
      */
     public function index(Request $request)
     {
+
+        if (!Auth::user()->can('certificates-list')) {
+            abort(403);
+        }
+
         $users = User::whereHas('certificate')->get();
         $query = Certificate::with(['user']);
+        if (Auth::user()->isNotA('superadmin')) {
+            $query->where('user_id', Auth::user()->id);
+        }
         if ($request->user_id && $request->user_id !== '0') {
             $query->where('user_id', $request->user_id);
         }
@@ -65,10 +73,16 @@ class CertificateController extends Controller
     }
     public function uploadAutoView()
     {
+        if (!Auth::user()->can('certificates-add')) {
+            abort(403);
+        }
         return view('admin.certificates.uploadauto');
     }
     public function uploadManualView()
     {
+        if (!Auth::user()->can('certificates-add')) {
+            abort(403);
+        }
         return view('admin.certificates.uploadmanual');
     }
 
@@ -76,6 +90,9 @@ class CertificateController extends Controller
     public function uploadFile(Request $request)
     {
 
+        if (!Auth::user()->can('certificates-add')) {
+            abort(403);
+        }
         $name = uploadImage($request, 'file', 'temp');
 
         $imageUpload = CertificateFile::create([
@@ -89,6 +106,9 @@ class CertificateController extends Controller
     public function uploadAuto(StoreAutoCertificateRequest $request)
     {
 
+        if (!Auth::user()->can('certificates-add')) {
+            abort(403);
+        }
         $file = CertificateFile::find($request->file_id);
 
         if ($file) {
@@ -123,6 +143,9 @@ class CertificateController extends Controller
 
     public function uploadManual(Request $request)
     {
+        if (!Auth::user()->can('certificates-add')) {
+            abort(403);
+        }
         $file = CertificateFile::find($request->file_id);
 
         if ($file) {
@@ -167,6 +190,9 @@ class CertificateController extends Controller
 
     public function placeQrView()
     {
+        if (!Auth::user()->can('certificates-add')) {
+            abort(403);
+        }
         return view('admin.certificates.certificatePlacement')->with([
             'image_path' => session('image_path'),
             'file_id' => session('file_id'),
@@ -178,14 +204,16 @@ class CertificateController extends Controller
     {
         // $x = $request->x;
         // $y = $request->y;
-        
+        if (!Auth::user()->can('certificates-add')) {
+            abort(403);
+        }
         Log::debug('x,y from request : ' . $request->x . '--' . $request->y);
-        
+
         $x = $request->x / 5.9;
         $y = $request->y / 5.9;
-        
+
         Log::debug('x,y after convert : ' . $x . '--' . $y);
-        
+
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
         processAutoUpload($certificate, $file, "manual", $x, $y);
@@ -195,6 +223,9 @@ class CertificateController extends Controller
 
     public function view(Certificate $certificate)
     {
+        if (!Auth::user()->can('certificates-view')) {
+            abort(403);
+        }
         $certificate->load('file');
         return view('admin.certificates.view')->with(['certificate' => $certificate]);
     }
@@ -218,6 +249,9 @@ class CertificateController extends Controller
 
     public function export()
     {
+        if (!Auth::user()->isA('superadmin')) {
+            abort(403);
+        }
         $name = "Certificate Export " . time() . '.xlsx';
         return Excel::download(new CertificateExport, $name);
     }
@@ -228,6 +262,7 @@ class CertificateController extends Controller
             ->registerModel(
                 Certificate::class,
                 'certificate_no',
+                'certificate_name',
                 'test',
                 'item_1',
                 'item_2',
@@ -235,32 +270,21 @@ class CertificateController extends Controller
                 'lot_2',
             )->search($request->q);
 
+        $isAdmin = Auth::user()->isA('superadmin');
+        $user = Auth::user()->id;
+
         $searchResults->each(function ($q) {
             $q->searchable->load('user');
         });
 
+        if (!$isAdmin) {
+            $filtered = $searchResults->filter(function ($q)  use ($isAdmin, $user) {
+                return $q->searchable->user_id == $user;
+            });
+            $searchResults =  $filtered;
+        }
+
         return view('admin.certificates.search-result')
             ->with(['searchResults' => $searchResults]);
-    }
-
-    public function test(Request $request)
-    {
-
-        dd($request);
-
-        // $pdf = new Pdf(getAdminAsset('img/certificate.pdf'));
-        // $pdf->saveImage(public_path('test.jpg'));
-
-
-
-        // $uploadedFile = $request->file('file');
-        // $filename = time() . $uploadedFile->getClientOriginalName();
-        // $name = Storage::disk('public')->putFileAs(
-        //     'files/' . $filename,
-        //     $uploadedFile,
-        //     $filename
-        // );
-        // dd(URL::to('storage/' . $name));
-        // dd(Storage::disk('public')->path($name));
     }
 }

@@ -14,12 +14,12 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware(function ($request, $next) {
-        //     if (Auth::user()->cannot('manage-users')) {
-        //         abort(403);
-        //     }
-        //     return $next($request);
-        // });
+        $this->middleware(function ($request, $next) {
+            if (!Auth::user()->hasUserPrivilages()) {
+                abort(403);
+            }
+            return $next($request);
+        });
     }
 
     /**
@@ -29,6 +29,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('admin-user-list')) {
+            abort(403);
+        }
         $users = User::with('roles')->get();
         return view('admin.users.index')->with([
             'users' => $users
@@ -42,6 +45,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('admin-user-add')) {
+            abort(403);
+        }
         $roles = Bouncer::role()->all();
         return view('admin.users.create')
             ->with([
@@ -57,6 +63,9 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        if (!Auth::user()->can('admin-user-add')) {
+            abort(403);
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -80,6 +89,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        if (!Auth::user()->can('admin-user-view')) {
+            abort(403);
+        }
         return view('admin.users.show')->with(['user' => $user]);
     }
 
@@ -91,6 +103,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (!Auth::user()->can('admin-user-edit')) {
+            abort(403);
+        }
         $roles = Bouncer::role()->all();
         $userRoles = $user->getRoles()->toArray();
         return view('admin.users.edit')
@@ -110,6 +125,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        if (!Auth::user()->can('admin-user-edit')) {
+            abort(403);
+        }
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -140,7 +158,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if (!Auth::user()->can('admin-user-delete')) {
+            abort(403);
+        }
         $user->delete();
+        Bouncer::refresh();
         return back()->with('status', 'User has been deleted.');
     }
 }
