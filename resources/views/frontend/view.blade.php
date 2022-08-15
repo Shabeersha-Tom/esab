@@ -93,7 +93,7 @@
         $(function() {
             $('.print').on('click', function() {
 
-                printJS({printable:'{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}', type:'pdf'}) // an entire obj
+                printJS('{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}') // an entire obj
 
                 // $.print("#the-canvas");
                 // var iframe = document.createElement('iframe');
