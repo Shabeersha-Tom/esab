@@ -45,8 +45,8 @@
             <div class="my-3 d-flex align-items-center justify-content-between">
                 <h2 class="pb-0 mb-0">Certificates</h3>
                     <div class="certificate_action ml-auto pr-4">
-                        <a href="{{ route('certificate.download',$certificate->slug) }}">
-                        {{-- <a href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}" download> --}}
+                        {{-- <a href="{{ route('certificate.download',$certificate->slug) }}"> --}}
+                        <a id="download" href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}" download>
                             <span class="mr-2"> <i class="glyph-icon simple-icon-cloud-download pr-1"></i>Download
                             </span>
                         </a>
@@ -107,6 +107,12 @@
                 iframe.contentWindow.focus();
                 iframe.contentWindow.print(); // Print.
             });
+        });
+    </script>
+
+    <script>
+        $('#download').on('click',funtion(e){
+            alert("asdad");
         });
     </script>
 
