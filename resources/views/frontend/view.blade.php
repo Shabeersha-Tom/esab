@@ -96,7 +96,7 @@
 
                 // printJS('{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}') // an entire obj
 
-                $.print("#the-canvas");
+                // $.print("#the-canvas");
                 var iframe = document.createElement('iframe');
                 // Hide the IFrame.  
                 iframe.style.visibility = "hidden";

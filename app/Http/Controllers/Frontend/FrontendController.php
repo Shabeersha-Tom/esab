@@ -27,7 +27,7 @@ class FrontendController extends Controller
         $certificate->update([
             'downloads' => $certificate->downloads + 1
         ]);
-        dd($certificate);
+        // dd($certificate);
         return  response()->download(URL::to($certificate->file->getFile($certificate->certificate_no)));
         // return  response()->download(public_path() . $certificate->file->getFile($certificate->certificate_no));
     }
