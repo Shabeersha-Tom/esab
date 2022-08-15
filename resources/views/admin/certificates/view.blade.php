@@ -15,11 +15,12 @@
             <div class="col-xl-6 mb-4">
                 <div class="certificate_head mb-2">
                     <div class="certificate_action">
-                        <a download target="new" href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}">
+                        <a download target="new"
+                            href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}">
                             <span class="mr-3">
                                 <i class="glyph-icon simple-icon-cloud-download pr-1"></i>Download
                             </span>
-                        </a> 
+                        </a>
                         <a href="#" class="print">
                             {{-- <a href="{{ route('admin.certificates.print', $certificate) }}"> --}}
                             <span>
@@ -30,7 +31,8 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <iframe class="iframe" id="printable" src="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}"
+                        <iframe class="iframe" id="printable"
+                            src="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}"
                             frameborder="0"></iframe>
                         {{-- <img id="printable" src="{{ $certificate->file->getFile($certificate->certificate_no) }}"
                             class="img-fluid" alt=""> --}}
@@ -50,11 +52,19 @@
     </style>
 @endpush
 @push('footer')
-    <script src="{{ asset('js/jQuery.print.js') }}"></script>
+    {{-- <script src="{{ asset('js/jQuery.print.js') }}"></script> --}}
     <script>
         $(function() {
             $('.print').on('click', function() {
-                $.print("#printable");
+                var iframe = document.createElement('iframe');
+                // Hide the IFrame.  
+                iframe.style.visibility = "hidden";
+                // Define the source.  
+                iframe.src = '{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}';
+                // Add the IFrame to the web page.
+                document.body.appendChild(iframe);
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print(); // Print.
             });
         });
     </script>
