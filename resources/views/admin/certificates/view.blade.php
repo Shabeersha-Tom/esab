@@ -30,7 +30,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <iframe class="iframe" src="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}"
+                        <iframe class="iframe" id="printable" src="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}"
                             frameborder="0"></iframe>
                         {{-- <img id="printable" src="{{ $certificate->file->getFile($certificate->certificate_no) }}"
                             class="img-fluid" alt=""> --}}
