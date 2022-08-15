@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/dore.light.blue.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
+    {{-- <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css"> --}}
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
 
     <style>
@@ -87,24 +87,24 @@
     <script src="{{ asset('js/scripts.single.theme.js') }}"></script>
     <script src="{{ asset('js/jQuery.print.js') }}"></script>
 
-    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    {{-- <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script> --}}
 
     <script>
         $(function() {
             $('.print').on('click', function() {
 
-                printJS('{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}') // an entire obj
+                // printJS('{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}') // an entire obj
 
-                // $.print("#the-canvas");
-                // var iframe = document.createElement('iframe');
-                // // Hide the IFrame.  
-                // iframe.style.visibility = "hidden";
-                // // Define the source.  
-                // iframe.src = '{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}';
-                // // Add the IFrame to the web page.
-                // document.body.appendChild(iframe);
-                // iframe.contentWindow.focus();
-                // iframe.contentWindow.print(); // Print.
+                $.print("#the-canvas");
+                var iframe = document.createElement('iframe');
+                // Hide the IFrame.  
+                iframe.style.visibility = "hidden";
+                // Define the source.  
+                iframe.src = '{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}';
+                // Add the IFrame to the web page.
+                document.body.appendChild(iframe);
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print(); // Print.
             });
         });
     </script>
