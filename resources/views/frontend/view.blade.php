@@ -79,6 +79,11 @@
             </div>
         </div>
     </main>
+
+    <iframe style="display: none" src="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}"
+        id="frame" width="400" height="400"></iframe><br>
+
+
     <script src="{{ asset('js/vendor/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/dore.script.js') }}"></script>
@@ -88,15 +93,20 @@
         $(function() {
             $('.print').on('click', function() {
                 // $.print("#the-canvas");
-                var iframe = document.createElement('iframe');
-                // Hide the IFrame.  
-                iframe.style.visibility = "hidden";
-                // Define the source.  
-                iframe.src = '{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}';
-                // Add the IFrame to the web page.
-                document.body.appendChild(iframe);
-                iframe.contentWindow.focus();
-                iframe.contentWindow.print(); // Print.
+                // var iframe = document.createElement('iframe');
+                // // Hide the IFrame.  
+                // iframe.style.visibility = "hidden";
+                // // Define the source.  
+                // iframe.src = '{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}';
+                // // Add the IFrame to the web page.
+                // document.body.appendChild(iframe);
+                // iframe.contentWindow.focus();
+                // iframe.contentWindow.print(); // Print.
+
+                var frame = document.getElementById('frame');
+                frame.contentWindow.focus();
+                frame.contentWindow.print();
+
             });
         });
     </script>
