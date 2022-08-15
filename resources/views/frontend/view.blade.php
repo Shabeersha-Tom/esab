@@ -87,7 +87,16 @@
     <script>
         $(function() {
             $('.print').on('click', function() {
-                $.print("#the-canvas");
+                // $.print("#the-canvas");
+                var iframe = document.createElement('iframe');
+                // Hide the IFrame.  
+                iframe.style.visibility = "hidden";
+                // Define the source.  
+                iframe.src = '{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}';
+                // Add the IFrame to the web page.
+                document.body.appendChild(iframe);
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print(); // Print.
             });
         });
     </script>
