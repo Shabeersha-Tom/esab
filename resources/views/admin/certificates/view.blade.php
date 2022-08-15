@@ -15,11 +15,11 @@
             <div class="col-xl-6 mb-4">
                 <div class="certificate_head mb-2">
                     <div class="certificate_action">
-                        <a href="{{ route('admin.certificates.download', $certificate) }}">
+                        <a href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}">
                             <span class="mr-3">
                                 <i class="glyph-icon simple-icon-cloud-download pr-1"></i>Download
                             </span>
-                        </a>
+                        </a> 
                         <a href="#" class="print">
                             {{-- <a href="{{ route('admin.certificates.print', $certificate) }}"> --}}
                             <span>

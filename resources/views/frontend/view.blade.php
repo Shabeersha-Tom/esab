@@ -71,7 +71,6 @@
                                     <p><b>Lot 2: </b> {{ $certificate->lot_2 ?? '-----' }}</p>
                                     <p><b>Item 1: </b> {{ $certificate->item_1 ?? '-----' }}</p>
                                     <p><b>Item 2: </b> {{ $certificate->item_2 ?? '-----' }}</p>
-
                                 </div>
                             </div>
                         </div>
