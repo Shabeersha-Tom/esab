@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/dore.light.blue.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
 
     <style>
@@ -80,18 +81,20 @@
         </div>
     </main>
 
-    <iframe style="display: none" src="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}"
-        id="frame" width="400" height="400"></iframe><br>
-
-
     <script src="{{ asset('js/vendor/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/dore.script.js') }}"></script>
     <script src="{{ asset('js/scripts.single.theme.js') }}"></script>
     <script src="{{ asset('js/jQuery.print.js') }}"></script>
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
     <script>
         $(function() {
             $('.print').on('click', function() {
+
+                printJS({printable:'{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}', type:'pdf'}) // an entire obj
+
                 // $.print("#the-canvas");
                 // var iframe = document.createElement('iframe');
                 // // Hide the IFrame.  
@@ -102,11 +105,6 @@
                 // document.body.appendChild(iframe);
                 // iframe.contentWindow.focus();
                 // iframe.contentWindow.print(); // Print.
-
-                var frame = document.getElementById('frame');
-                frame.contentWindow.focus();
-                frame.contentWindow.print();
-
             });
         });
     </script>
