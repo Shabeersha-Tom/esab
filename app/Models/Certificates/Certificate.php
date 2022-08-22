@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
-class Certificate extends Model implements Searchable
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+
+class Certificate extends Model implements Searchable, Viewable
 {
-    use HasFactory;
+    use HasFactory, InteractsWithViews;
+
+    protected $removeViewsOnDelete = true;
 
     protected $fillable = [
         'user_id',
@@ -21,8 +26,6 @@ class Certificate extends Model implements Searchable
         'item_2',
         'lot_1',
         'lot_2',
-        'views',
-        'downloads',
         'slug',
         'status',
     ];
@@ -43,5 +46,15 @@ class Certificate extends Model implements Searchable
     function file()
     {
         return $this->hasOne(CertificateFile::class, 'certificate_no');
+    }
+
+    function getViews()
+    {
+        return $this->views->where('collection', 'views')->unique('visitor')->count();
+    }
+
+    function getDownloads()
+    {
+        return $this->views->where('collection', 'downloads')->unique('visitor')->count();
     }
 }

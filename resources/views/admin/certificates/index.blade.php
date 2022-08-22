@@ -91,10 +91,10 @@
                                                         {{ $certificate->user->name }}
                                                     </td>
                                                     <td>
-                                                        {{ $certificate->downloads }}
+                                                        {{ $certificate->getDownloads() }}
                                                     </td>
                                                     <td>
-                                                        {{ $certificate->views }}
+                                                        {{ $certificate->getViews() }}
                                                     </td>
                                                 </tr>
                                             @endforeach

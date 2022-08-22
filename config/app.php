@@ -186,6 +186,8 @@ return [
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
+
     ],
 
     /*
