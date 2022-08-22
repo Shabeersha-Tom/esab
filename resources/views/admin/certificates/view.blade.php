@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('content')
-    <div class="container-fluid disable-text-selection">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="mb-3 d-flex align-items-center justify-content-between">
@@ -36,6 +36,50 @@
                             frameborder="0"></iframe>
                         {{-- <img id="printable" src="{{ $certificate->file->getFile($certificate->certificate_no) }}"
                             class="img-fluid" alt=""> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 mt-4">
+                <div class="card ">
+                    <div class="card-body">
+                        <h2>Vistor History</h2>
+
+                        @if ($certificate->views)
+                            <table class="table table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            No:
+                                        </th>
+                                        <th scope="col">IP</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($certificate->views->sortBy('viewed_at') as $view)
+                                        <tr>
+                                            <td>
+                                                {{ $loop->iteration }}
+                                            </td>
+                                            <td>
+                                                {{ $view->ip_address }}
+                                            </td>
+                                            <td>
+                                                {{ $view->ip_address }}
+                                            </td>
+                                            <td>
+                                                {{ ucfirst($view->collection) }}
+                                            </td>
+                                            <td>
+                                                {{ Carbon\Carbon::parse($view->viewed_at)->format('d/m/Y') }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endif
                     </div>
                 </div>
             </div>
