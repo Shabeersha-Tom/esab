@@ -18,6 +18,6 @@ include('user.php');
 
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/certificate/{slug}', [FrontendController::class, 'certificate'])->name('certificate.view');
-Route::get('/certificate/{certificate:slug}/download', [FrontendController::class, 'download'])->name('certificate.download');
+Route::post('/certificate/download', [FrontendController::class, 'download'])->name('certificate.download');
 
 
