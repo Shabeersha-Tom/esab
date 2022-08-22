@@ -44,8 +44,8 @@
                                                 </th>
                                                 <th scope="col">Test</th>
                                                 <th scope="col">Item 1</th>
-                                                <th scope="col">Item 2</th>
                                                 <th scope="col">Lot 1</th>
+                                                <th scope="col">Item 2</th>
                                                 <th scope="col">Lot 2</th>
                                                 <th scope="col">
                                                     Uploaded Date
@@ -76,10 +76,10 @@
                                                         {{ $certificate->item_1 }}
                                                     </td>
                                                     <td>
-                                                        {{ $certificate->item_2 }}
+                                                        {{ $certificate->lot_1 }}
                                                     </td>
                                                     <td>
-                                                        {{ $certificate->lot_1 }}
+                                                        {{ $certificate->item_2 }}
                                                     </td>
                                                     <td>
                                                         {{ $certificate->lot_2 }}

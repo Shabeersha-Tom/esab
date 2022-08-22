@@ -30,6 +30,18 @@
             direction: ltr;
             width: 100%;
         }
+
+        @media(min-width:1024px) {
+            .data_line {
+                display: flex;
+                flex-direction: revert;
+                gap: 10px;
+            }
+
+            .data_line p {
+                width: 50%;
+            }
+        }
     </style>
 
 </head>
@@ -46,7 +58,8 @@
                 <h2 class="pb-0 mb-0">Certificates</h3>
                     <div class="certificate_action ml-auto pr-4">
                         {{-- <a href="{{ route('certificate.download',$certificate->slug) }}"> --}}
-                        <a id="download" href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}" download>
+                        <a id="download"
+                            href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}" download>
                             <span class="mr-2"> <i class="glyph-icon simple-icon-cloud-download pr-1"></i>Download
                             </span>
                         </a>
@@ -69,10 +82,14 @@
                                 <div class="data_card">
                                     <p><b>{{ $certificate->certificate_name }} </b></p>
                                     <p><b>Certificate No : </b> {{ $certificate->certificate_no }}</p>
-                                    <p><b>Lot 1: </b> {{ $certificate->lot_1 ?? '-----' }}</p>
-                                    <p><b>Lot 2: </b> {{ $certificate->lot_2 ?? '-----' }}</p>
-                                    <p><b>Item 1: </b> {{ $certificate->item_1 ?? '-----' }}</p>
-                                    <p><b>Item 2: </b> {{ $certificate->item_2 ?? '-----' }}</p>
+                                    <div class="data_line">
+                                        <p><b>Item 1: </b> {{ $certificate->item_1 ?? '-----' }}</p>
+                                        <p><b>Lot 1: </b> {{ $certificate->lot_1 ?? '-----' }}</p>
+                                    </div>
+                                    <div class="data_line">
+                                        <p><b>Item 2: </b> {{ $certificate->item_2 ?? '-----' }}</p>
+                                        <p><b>Lot 2: </b> {{ $certificate->lot_2 ?? '-----' }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +128,7 @@
     </script>
 
     <script>
-        $('#download').on('click',funtion(e){
+        $('#download').on('click', funtion(e) {
             alert("asdad");
         });
     </script>
