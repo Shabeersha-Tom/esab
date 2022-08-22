@@ -22,8 +22,8 @@ class DashboardController extends Controller
 
         $usersCount = User::count();
         $certificatesCount = Certificate::count();
-        $certificatesViewCount = Certificate::where('views', '>', 0)->count();
-        $certificatesDownloadCount = Certificate::where('downloads', '>', 0)->count();
+        $certificatesViewCount = views(Certificate::class)->collection('views')->unique()->count();
+        $certificatesDownloadCount = views(Certificate::class)->collection('downloads')->unique()->count();
 
         return view('admin.dashboard', [
             'usersCount' => $usersCount,

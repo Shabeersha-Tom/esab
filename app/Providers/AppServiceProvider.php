@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Classes\ElViews;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Bouncer;
@@ -16,7 +17,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            \CyrildeWit\EloquentViewable\Contracts\Views::class,
+            ElViews::class
+        );
     }
 
     /**

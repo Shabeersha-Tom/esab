@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Certificates\Certificate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 
 class FrontendController extends Controller
 {
