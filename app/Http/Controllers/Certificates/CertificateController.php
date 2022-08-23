@@ -233,8 +233,9 @@ class CertificateController extends Controller
         if (!Auth::user()->can('certificates-view')) {
             abort(403);
         }
-        $certificate->load(['file','views']);
-        return view('admin.certificates.view')->with(['certificate' => $certificate]);
+        $certificate->load(['file']);
+        $logs = $certificate->views()->paginate(15);
+        return view('admin.certificates.view')->with(['certificate' => $certificate, 'logs' => $logs]);
     }
 
     public function download(Certificate $certificate)

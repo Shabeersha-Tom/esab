@@ -188,6 +188,7 @@ return [
 
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 
+        Stevebauman\Location\LocationServiceProvider::class,
     ],
 
     /*
@@ -246,6 +247,8 @@ return [
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
+
 
 
     ],

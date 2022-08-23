@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <h2>Vistor History</h2>
 
-                        @if ($certificate->views)
+                        @if ($logs)
                             <table class="table table-bordered mb-0">
                                 <thead>
                                     <tr>
@@ -58,7 +58,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($certificate->views->sortBy('viewed_at') as $view)
+                                    @foreach ($logs->sortBy('viewed_at') as $view)
                                         <tr>
                                             <td>
                                                 {{ $loop->iteration }}
@@ -67,7 +67,7 @@
                                                 {{ $view->ip_address }}
                                             </td>
                                             <td>
-                                                {{ $view->ip_address }}
+                                                {{ Location::get('192.168.1.1'); }}
                                             </td>
                                             <td>
                                                 {{ ucfirst($view->collection) }}
@@ -79,6 +79,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $logs->links() }}
                         @endif
                     </div>
                 </div>
@@ -92,6 +93,9 @@
             width: 100%;
             height: 700px;
             border: none;
+        }
+        .pagination{
+            justify-content: center;
         }
     </style>
 @endpush
