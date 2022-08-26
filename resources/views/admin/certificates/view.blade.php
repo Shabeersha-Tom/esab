@@ -67,7 +67,7 @@
                                                 {{ $view->ip_address }}
                                             </td>
                                             <td>
-                                                {{ Location::get('192.168.1.1'); }}
+                                                {{ Location::get($view->ip_address); }}
                                             </td>
                                             <td>
                                                 {{ ucfirst($view->collection) }}
