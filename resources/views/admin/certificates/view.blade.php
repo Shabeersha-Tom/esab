@@ -67,7 +67,10 @@
                                                 {{ $view->ip_address }}
                                             </td>
                                             <td>
-                                                {{ dd(Location::get($view->ip_address)) }}
+                                                @php
+                                                    $location = Location::get($view->ip_address);
+                                                @endphp
+                                                {{ $location->cityName . ', ' . $location->countryName }}
                                             </td>
                                             <td>
                                                 {{ ucfirst($view->collection) }}
@@ -94,7 +97,8 @@
             height: 700px;
             border: none;
         }
-        .pagination{
+
+        .pagination {
             justify-content: center;
         }
     </style>
