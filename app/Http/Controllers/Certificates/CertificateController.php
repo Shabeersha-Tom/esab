@@ -42,7 +42,7 @@ class CertificateController extends Controller
         }
 
         $users = User::whereHas('certificate')->get();
-        $query = Certificate::with(['user', 'views']);
+        $query = Certificate::whereStatus(true)->with(['user', 'views']);
         if (Auth::user()->isNotA('superadmin')) {
             $query->where('user_id', Auth::user()->id);
         }
