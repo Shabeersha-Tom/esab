@@ -67,7 +67,7 @@
                                                 {{ $view->ip_address }}
                                             </td>
                                             <td>
-                                                {{ Location::get($view->ip_address) }}
+                                                {{ dd(Location::get($view->ip_address)) }}
                                             </td>
                                             <td>
                                                 {{ ucfirst($view->collection) }}
