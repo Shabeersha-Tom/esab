@@ -58,6 +58,10 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::get('/place-qr', [CertificateController::class, 'placeQrView'])->name('placeQr');
                 Route::post('/place-qr', [CertificateController::class, 'placeQr']);
 
+                Route::post('/cancel', [CertificateController::class, 'cancelUpload'])->name('cancel');
+
+                Route::post('/delete/{certificate}', [CertificateController::class, 'delete'])->name('delete');
+
                 Route::get('/view/{certificate}', [CertificateController::class, 'view'])->name('view');
                 Route::get('/download/{certificate}', [CertificateController::class, 'download'])->name('download');
                 Route::get('/print/{certificate}', [CertificateController::class, 'print'])->name('print');

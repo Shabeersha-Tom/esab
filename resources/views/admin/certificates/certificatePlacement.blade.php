@@ -11,9 +11,25 @@
         <input type="hidden" id="h" name="h" value="" />
         <input type="hidden" id="a" name="a" value="" />
         <input type="submit" class="btn btn_primary mt-2" name="save" value="Submit" />
+        <input type="button" class="btn btn-danger mt-2" name="cancel" id="cancel" value="Cancel" />
+    </form>
+
+    <form id="cancelForm" method="post" action="{{ route('admin.certificates.cancel') }}">
+        @csrf
+        <input type="hidden" name="certificate_id" value="{{ $certificate_id }}" />
+        <input type="hidden" name="file_id" value="{{ $file_id }}" />
     </form>
 @endsection
 @push('header')
+    <style type="text/css">
+        div.watermark {
+            border: 1px dashed #000;
+        }
+
+        img.watermark:hover {
+            cursor: move;
+        }
+    </style>
 @endpush
 @push('footer')
     <script src="{{ getAdminAsset('js/jq.js') }}"></script>
@@ -40,13 +56,9 @@
         };
         //-->
     </script>
-    <style type="text/css">
-        div.watermark {
-            border: 1px dashed #000;
-        }
-
-        img.watermark:hover {
-            cursor: move;
-        }
-    </style>
+    <script>
+        $('#cancel').on('click', function() {
+            $('#cancelForm').sumbit();
+        });
+    </script>
 @endpush

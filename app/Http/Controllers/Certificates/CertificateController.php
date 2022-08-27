@@ -67,10 +67,55 @@ class CertificateController extends Controller
             ]);
     }
 
-    public function searchView()
+
+    public function view(Certificate $certificate)
     {
-        return view('admin.certificates.search');
+        if (!Auth::user()->can('certificates-view')) {
+            abort(403);
+        }
+        $certificate->load(['file']);
+        $logs = $certificate->views()->paginate(15);
+        return view('admin.certificates.view')->with(['certificate' => $certificate, 'logs' => $logs]);
     }
+
+    public function download(Certificate $certificate)
+    {
+        $certificate->load('file');
+        return  response()->download(public_path() . $certificate->file->getFile($certificate->certificate_no));
+    }
+
+    public function print(Certificate $certificate)
+    {
+        $certificate->load('file');
+        return view('admin.certificates.view')->with(['certificate' => $certificate]);
+    }
+
+    public function delete(Certificate $certificate)
+    {
+        // if (!Auth::user()->can('certificates-delete')) {
+        //     abort(403);
+        // }
+
+        $certificate->load('file');
+        $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
+        deleteFile($file);
+        $certificate->file->delete();
+        $certificate->delete();
+
+        return redirect()->route('admin.certificates.index')->with('status', 'Certificate deleted');
+
+    }
+
+    public function export()
+    {
+        if (!Auth::user()->isA('superadmin')) {
+            abort(403);
+        }
+        $name = "Certificate Export " . time() . '.xlsx';
+        return Excel::download(new CertificateExport, $name);
+    }
+
+
     public function uploadAutoView()
     {
         if (!Auth::user()->can('certificates-add')) {
@@ -84,15 +129,6 @@ class CertificateController extends Controller
             abort(403);
         }
         return view('admin.certificates.uploadmanual');
-    }
-
-    public function checkNumber(Request $request)
-    {
-        $certificate = Certificate::where('certificate_no', $request->cer_number)->first();
-        if ($certificate) {
-            return json_encode(false);
-        }
-        return json_encode(true);
     }
 
     public function uploadFile(Request $request)
@@ -219,7 +255,7 @@ class CertificateController extends Controller
         $x = $request->x / 5.9;
         $y = $request->y / 5.9;
 
-        Log::debug('x,y after convert : ' . $x . '--' . $y);
+        // Log::debug('x,y after convert : ' . $x . '--' . $y);
 
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
@@ -227,41 +263,28 @@ class CertificateController extends Controller
         return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
     }
 
-
-    public function view(Certificate $certificate)
+    public function cancelUpload(Request $request)
     {
-        if (!Auth::user()->can('certificates-view')) {
-            abort(403);
+
+        $file = CertificateFile::find($request->file_id);
+        $certificate = Certificate::find($request->certificate_id);
+        $file->getFilePath($certificate->certificate_no);
+    }
+
+
+
+    public function checkNumber(Request $request)
+    {
+        $certificate = Certificate::where('certificate_no', $request->cer_number)->first();
+        if ($certificate) {
+            return json_encode(false);
         }
-        $certificate->load(['file']);
-        $logs = $certificate->views()->paginate(15);
-        return view('admin.certificates.view')->with(['certificate' => $certificate, 'logs' => $logs]);
+        return json_encode(true);
     }
 
-    public function download(Certificate $certificate)
+    public function searchView()
     {
-        $certificate->load('file');
-        return  response()->download(public_path() . $certificate->file->getFile($certificate->certificate_no));
-    }
-
-    public function print(Certificate $certificate)
-    {
-        $certificate->load('file');
-        return view('admin.certificates.view')->with(['certificate' => $certificate]);
-    }
-
-    public function testView()
-    {
-        return view('admin.test');
-    }
-
-    public function export()
-    {
-        if (!Auth::user()->isA('superadmin')) {
-            abort(403);
-        }
-        $name = "Certificate Export " . time() . '.xlsx';
-        return Excel::download(new CertificateExport, $name);
+        return view('admin.certificates.search');
     }
 
     public function searchResult(Request $request)
@@ -294,5 +317,10 @@ class CertificateController extends Controller
 
         return view('admin.certificates.search-result')
             ->with(['searchResults' => $searchResults]);
+    }
+
+    public function testView()
+    {
+        return view('admin.test');
     }
 }

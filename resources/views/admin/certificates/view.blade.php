@@ -15,6 +15,13 @@
             <div class="col-xl-6 mb-4">
                 <div class="certificate_head mb-2">
                     <div class="certificate_action">
+
+                        <a href="#" id="deleteBtn">
+                            <span class="mr-3">
+                                <i class="glyph-icon simple-icon-trash pr-1"></i>Delete
+                            </span>
+                        </a>
+
                         <a download target="new"
                             href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}">
                             <span class="mr-3">
@@ -70,7 +77,7 @@
                                                 @php
                                                     $location = Location::get($view->ip_address);
                                                 @endphp
-                                                {{ $location->cityName . ', ' . $location->countryName }}
+                                                {{ $location ? $location->cityName . ', ' . $location->countryName : "" }}
                                             </td>
                                             <td>
                                                 {{ ucfirst($view->collection) }}
@@ -89,6 +96,11 @@
             </div>
         </div>
     </div>
+
+    <form action="{{ route('admin.certificates.delete', $certificate) }}" id="deleteForm" method="POST">
+        @csrf
+    </form>
+
 @endsection
 @push('header')
     <style>
@@ -118,6 +130,12 @@
                 iframe.contentWindow.focus();
                 iframe.contentWindow.print(); // Print.
             });
+        });
+    </script>
+    <script>
+        $('#deleteBtn').on('click', function(e) {
+            e.preventDefault();
+            $('#deleteForm').submit();
         });
     </script>
 @endpush
