@@ -55,34 +55,34 @@
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Test</label>
                                     <input type="text" class="form-control" name="test" value="{{ old('test') }}"
-                                        id="inputEmail4" placeholder="Enter Test" />
+                                        id="test" placeholder="Enter Test" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Item 1</label>
-                                    <input type="text" class="form-control" name="item_1" id="inputEmail4"
+                                    <input type="text" class="form-control" name="item_1" id="item_1"
                                         placeholder="Enter Item 1" value="{{ old('item_1') }}" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Item 2</label>
-                                    <input type="text" class="form-control" name="item_2" id="inputEmail4"
+                                    <input type="text" class="form-control" name="item_2" id="item_2"
                                         placeholder="Enter Item 2" value="{{ old('item_2') }}" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Lot 1</label>
-                                    <input type="text" class="form-control" name="lot_1" id="inputEmail4"
+                                    <input type="text" class="form-control" name="lot_1" id="lot_1"
                                         placeholder="Enter Lot 1" value="{{ old('lot_1') }}" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Lot 2</label>
-                                    <input type="text" class="form-control" name="lot_2" id="inputEmail4"
+                                    <input type="text" class="form-control" name="lot_2" id="lot_2"
                                         placeholder="Enter Lot 2" value="{{ old('lot_2') }}" />
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                 uploadprogress: function(file, progress, bytesSent) {
                     if (file.previewElement) {
                         var progressElement = $('#dz-uploadprogress');
-                        $('#dz-uploadprogress').width(progress+'%')
+                        $('#dz-uploadprogress').width(progress + '%')
                         // progressElement.querySelector(".progress-text").textContent = progress + "%";
                     }
                 }
@@ -226,5 +226,33 @@
                 $('#mainForm').submit();
             }
         });
+    </script>
+    <script>
+        $('#cer_number, #test, #item_1, #item_2, #lot_1, #lot_2').change(function() {
+            $title = "";
+            $title += $('#cer_number').val() ? $('#cer_number').val() + '_' : "";
+            $title += $('#test').val() ? $('#test').val() + '_' : "";
+            $title += $('#item_1').val() ? $('#item_1').val() + '_' : "";
+            $title += $('#lot_1').val() ? $('#lot_1').val() + '_' : "";
+            $title += $('#item_2').val() ? $('#item_2').val() + '_' : "";
+            $title += $('#lot_2').val() ? $('#lot_2').val() : "";
+
+            $title = trimChar($title, '_');
+
+            $('#title').val($title);
+
+        });
+
+        function trimChar(string, charToRemove) {
+            while (string.charAt(0) == charToRemove) {
+                string = string.substring(1);
+            }
+
+            while (string.charAt(string.length - 1) == charToRemove) {
+                string = string.substring(0, string.length - 1);
+            }
+
+            return string;
+        }
     </script>
 @endpush
