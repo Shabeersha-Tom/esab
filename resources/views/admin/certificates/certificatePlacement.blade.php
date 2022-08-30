@@ -11,7 +11,7 @@
         <input type="hidden" id="h" name="h" value="" />
         <input type="hidden" id="a" name="a" value="" />
         <input type="submit" class="btn btn_primary mt-2" name="save" value="Submit" />
-        <input type="button" class="btn btn-danger mt-2" name="cancel" id="cancel" value="Cancel" />
+        <input type="button" class="btn btn-danger mt-2" name="cancel" id="cancelButton" value="Cancel" />
     </form>
 
     <form id="cancelForm" method="post" action="{{ route('admin.certificates.cancel') }}">
@@ -57,8 +57,10 @@
         //-->
     </script>
     <script>
-        $('#cancel').on('click', function() {
-            $('#cancelForm').sumbit();
+    
+        $('body').delegate('#cancelButton', 'click', function () {
+            document.getElementById("cancelForm").submit();
         });
+    
     </script>
 @endpush

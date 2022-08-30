@@ -272,7 +272,21 @@ class CertificateController extends Controller
     {
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
-        $file->getFilePath($certificate->certificate_no);
+        
+        $filePath = $file->getFileStoragePath($certificate->certificate_no);
+        
+        deleteFile($filePath);
+
+        $files = Storage::allFiles('public/certificates/' . $certificate->certificate_no . "/");
+        if (empty($files)) {
+            Storage::deleteDirectory('public/certificates/' . $certificate->certificate_no . "/");
+        }
+
+        $certificate->file->delete();
+        $certificate->delete();
+        
+        return redirect()->route('admin.certificates.uploadmanual');
+        
     }
 
     public function checkNumber(Request $request)
