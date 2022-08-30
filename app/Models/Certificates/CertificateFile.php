@@ -15,6 +15,7 @@ class CertificateFile extends Model
         'certificate_no',
         'path',
         'status',
+        'user_id'
     ];
 
     public function certificate()

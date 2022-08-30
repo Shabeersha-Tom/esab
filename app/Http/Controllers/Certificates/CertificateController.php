@@ -141,7 +141,8 @@ class CertificateController extends Controller
 
         $imageUpload = CertificateFile::create([
             'path' => $name,
-            'status' => 'draft'
+            'status' => 'draft',
+            'user_id' => Auth::user()->id
         ]);
 
         return response()->json(['success' => $imageUpload->id]);
