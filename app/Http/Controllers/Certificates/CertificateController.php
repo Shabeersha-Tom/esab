@@ -228,6 +228,10 @@ class CertificateController extends Controller
             // Convert pd to image
             $certificateImage = convertPdfToImage($certificate, $file);
 
+            $certificate->update([
+                'status' => true
+            ]);
+
             return redirect()->route('admin.certificates.placeQr')->with([
                 'image_path' => $certificateImage,
                 'file_id' => $request->file_id,
