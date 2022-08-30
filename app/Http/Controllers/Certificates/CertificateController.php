@@ -99,11 +99,17 @@ class CertificateController extends Controller
         $certificate->load('file');
         $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
         deleteFile($file);
+
+        $dir = Storage::directories('public/certificates/' . $certificate->certificate_no);
+        $files = Storage::allFiles($dir);
+        if (empty($files)) {
+            Storage::deleteDirectory($dir);
+        }
+
         $certificate->file->delete();
         $certificate->delete();
 
         return redirect()->route('admin.certificates.index')->with('status', 'Certificate deleted');
-
     }
 
     public function export()
@@ -165,6 +171,7 @@ class CertificateController extends Controller
                 'lot_1' => $request->lot_1,
                 'lot_2' => $request->lot_2,
                 'slug' => Str::uuid()->toString(),
+                'status' => false,
             ]);
 
             $old_path = "/storage/temp/" . $file->path;
@@ -172,12 +179,16 @@ class CertificateController extends Controller
 
             moveFile($old_path, $new_path);
 
+            processAutoUpload($certificate, $file, $request->position);
+
             $file->update([
                 'status' => 'active',
                 'certificate_no' => $certificate->id,
             ]);
 
-            processAutoUpload($certificate, $file, $request->position);
+            $certificate->update([
+                'status' => true
+            ]);
 
             return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
         }
