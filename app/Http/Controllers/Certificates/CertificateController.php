@@ -228,19 +228,11 @@ class CertificateController extends Controller
             // Convert pd to image
             $certificateImage = convertPdfToImage($certificate, $file);
 
-            $certificate->update([
-                'status' => true
-            ]);
-
             return redirect()->route('admin.certificates.placeQr')->with([
                 'image_path' => $certificateImage,
                 'file_id' => $request->file_id,
                 'certificate_id' => $certificate->id
             ]);
-
-            // processManualUpload($certificate, $file);
-
-            // return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
         }
 
         return back()->withErrors('file_error', 'Sorry, something went wrong, please try again');
@@ -260,33 +252,28 @@ class CertificateController extends Controller
 
     public function placeQr(Request $request)
     {
-        // $x = $request->x;
-        // $y = $request->y;
         if (!Auth::user()->can('certificates-add')) {
             abort(403);
         }
-        Log::debug('x,y from request : ' . $request->x . '--' . $request->y);
 
         $x = $request->x / 5.9;
         $y = $request->y / 5.9;
 
-        // Log::debug('x,y after convert : ' . $x . '--' . $y);
-
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
         processAutoUpload($certificate, $file, "manual", $x, $y);
+        $certificate->update([
+            'status' => true
+        ]);
         return redirect()->route('admin.certificates.index')->with('status', 'Certificate uploaded');
     }
 
     public function cancelUpload(Request $request)
     {
-
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
         $file->getFilePath($certificate->certificate_no);
     }
-
-
 
     public function checkNumber(Request $request)
     {
