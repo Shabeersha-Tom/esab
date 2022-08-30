@@ -100,10 +100,9 @@ class CertificateController extends Controller
         $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
         deleteFile($file);
 
-        $dir = Storage::directories('public/certificates/' . $certificate->certificate_no);
-        $files = Storage::allFiles($dir);
+        $files = Storage::allFiles('public/certificates/' . $certificate->certificate_no . "/");
         if (empty($files)) {
-            Storage::deleteDirectory($dir);
+            Storage::deleteDirectory('public/certificates/' . $certificate->certificate_no . "/");
         }
 
         $certificate->file->delete();
