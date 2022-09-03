@@ -78,6 +78,15 @@ class CertificateController extends Controller
         return view('admin.certificates.view')->with(['certificate' => $certificate, 'logs' => $logs]);
     }
 
+    public function edit(Certificate $certificate)
+    {
+        $certificate->load(['file']);
+        return view('admin.certificates.edit')
+            ->with([
+                'certificate' => $certificate
+            ]);
+    }
+
     public function download(Certificate $certificate)
     {
         $certificate->load('file');
@@ -95,6 +104,8 @@ class CertificateController extends Controller
         // if (!Auth::user()->can('certificates-delete')) {
         //     abort(403);
         // }
+
+        $certificate->views()->delete();
 
         $certificate->load('file');
         $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
@@ -272,9 +283,9 @@ class CertificateController extends Controller
     {
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
-        
+
         $filePath = $file->getFileStoragePath($certificate->certificate_no);
-        
+
         deleteFile($filePath);
 
         $files = Storage::allFiles('public/certificates/' . $certificate->certificate_no . "/");
@@ -284,9 +295,8 @@ class CertificateController extends Controller
 
         $certificate->file->delete();
         $certificate->delete();
-        
+
         return redirect()->route('admin.certificates.uploadmanual');
-        
     }
 
     public function checkNumber(Request $request)

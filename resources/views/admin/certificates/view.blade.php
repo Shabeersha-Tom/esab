@@ -14,26 +14,36 @@
         <div class="row">
             <div class="col-xl-6 mb-4">
                 <div class="certificate_head mb-2">
-                    <div class="certificate_action">
+                    <div class="certificate_action w-100 d-flex justify-content-between">
 
-                        <a href="#" id="deleteBtn">
-                            <span class="mr-3">
-                                <i class="glyph-icon simple-icon-trash pr-1"></i>Delete
-                            </span>
-                        </a>
+                        <div>
+                            <a href="#" id="deleteBtn">
+                                <span class="mr-3">
+                                    <i class="glyph-icon simple-icon-trash pr-1"></i>Delete
+                                </span>
+                            </a>
+                            <a href="{{ route('admin.certificates.edit', $certificate) }}">
+                                <span class="mr-3">
+                                    <i class="glyph-icon simple-icon-pencil pr-1"></i>Edit
+                                </span>
+                            </a>
+                        </div>
 
-                        <a download target="new"
-                            href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}">
-                            <span class="mr-3">
-                                <i class="glyph-icon simple-icon-cloud-download pr-1"></i>Download
-                            </span>
-                        </a>
-                        <a href="#" class="print">
-                            {{-- <a href="{{ route('admin.certificates.print', $certificate) }}"> --}}
-                            <span>
-                                <i class="glyph-icon simple-icon-printer pr-1"></i>Print
-                            </span>
-                        </a>
+                        <div>
+                            <a download target="new"
+                                href="{{ URL::to($certificate->file->getFile($certificate->certificate_no)) }}">
+                                <span class="mr-3">
+                                    <i class="glyph-icon simple-icon-cloud-download pr-1"></i>Download
+                                </span>
+                            </a>
+                            <a href="#" class="print">
+                                {{-- <a href="{{ route('admin.certificates.print', $certificate) }}"> --}}
+                                <span>
+                                    <i class="glyph-icon simple-icon-printer pr-1"></i>Print
+                                </span>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
                 <div class="card">
@@ -77,7 +87,7 @@
                                                 @php
                                                     $location = Location::get($view->ip_address);
                                                 @endphp
-                                                {{ $location ? $location->cityName . ', ' . $location->countryName : "" }}
+                                                {{ $location ? $location->cityName . ', ' . $location->countryName : '' }}
                                             </td>
                                             <td>
                                                 {{ ucfirst($view->collection) }}
@@ -135,7 +145,9 @@
     <script>
         $('#deleteBtn').on('click', function(e) {
             e.preventDefault();
-            $('#deleteForm').submit();
+            if (confirm('Are you sure you want to delete this certificate')) {
+                $('#deleteForm').submit();
+            }
         });
     </script>
 @endpush

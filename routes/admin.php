@@ -63,6 +63,8 @@ Route::prefix(config('app.admin_prefix'))->group(function () {
                 Route::post('/delete/{certificate}', [CertificateController::class, 'delete'])->name('delete');
 
                 Route::get('/view/{certificate}', [CertificateController::class, 'view'])->name('view');
+                Route::get('/edit/{certificate}', [CertificateController::class, 'edit'])->name('edit');
+                
                 Route::get('/download/{certificate}', [CertificateController::class, 'download'])->name('download');
                 Route::get('/print/{certificate}', [CertificateController::class, 'print'])->name('print');
             });
