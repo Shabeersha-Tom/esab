@@ -87,6 +87,40 @@ class CertificateController extends Controller
             ]);
     }
 
+    public function update(Certificate $certificate, Request $request)
+    {
+        $oldNumber = $certificate->certificate_no;
+
+        $status = $certificate->update([
+            'certificate_name' => $request->title,
+            'certificate_no' => $request->cer_number,
+            'test' => $request->test,
+            'item_1' => $request->item_1,
+            'item_2' => $request->item_2,
+            'lot_1' => $request->lot_1,
+            'lot_2' => $request->lot_2,
+            'status' => $request->status,
+        ]);
+
+        if ($status) {
+            // get old director
+            $oldDir = Storage::path('public/certificates/' . $oldNumber . "/");
+            $newDir = Storage::path('public/certificates/' . $request->cer_number . "/");
+            // Rename
+            $renameStatus = rename($oldDir, $newDir);
+            // If rename not success change the certificate number back
+            if (!$renameStatus) {
+                $status = $certificate->update([
+                    'certificate_no' => $oldNumber,
+                ]);
+            }
+        }
+
+        if ($request->update) {
+            return redirect()->route('admin.certificates.index')->with('status', 'Certificate updated');
+        }
+    }
+
     public function download(Certificate $certificate)
     {
         $certificate->load('file');
@@ -269,7 +303,7 @@ class CertificateController extends Controller
 
         $x = $request->x / 5.75;
         $y = $request->y / 6.2;
-        
+
         // $x = $request->x / 5.9;
         // $y = $request->y / 5.9;
 
@@ -304,7 +338,11 @@ class CertificateController extends Controller
 
     public function checkNumber(Request $request)
     {
-        $certificate = Certificate::where('certificate_no', $request->cer_number)->first();
+        $query = Certificate::where('certificate_no', $request->cer_number);
+        if ($request->current_id) {
+            $query->where('id', '!=', $request->current_id);
+        }
+        $certificate = $query->first();
         if ($certificate) {
             return json_encode(false);
         }

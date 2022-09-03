@@ -12,29 +12,31 @@
             <div class="col-12 col-xl-6 mb-4 mb-xl-0">
                 <div class="card drop-area">
                     <div class="card-body">
-                        <form id="mainForm" method="POST">
+                        <form id="mainForm" method="POST" action="{{ route('admin.certificates.edit', $certificate) }}">
                             @csrf
                             <x-form.error name="file_error" />
-                            
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Certificate Title</label>
                                     <input type="text" class="form-control" name="title" id="title"
-                                        placeholder="Enter title" value="{{ old('name', $certificate->certificate_name) }}" required />
+                                        placeholder="Enter title" value="{{ old('name', $certificate->certificate_name) }}"
+                                        required />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Certificate Number</label>
                                     <input type="number" class="form-control" name="cer_number" id="cer_number"
-                                        placeholder="Enter number" value="{{ old('cer_number', $certificate->certificate_no) }}" required />
+                                        placeholder="Enter number"
+                                        value="{{ old('cer_number', $certificate->certificate_no) }}" required />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Test</label>
-                                    <input type="text" class="form-control" name="test" value="{{ old('test', $certificate->test) }}"
-                                        id="test" placeholder="Enter Test" />
+                                    <input type="text" class="form-control" name="test"
+                                        value="{{ old('test', $certificate->test) }}" id="test"
+                                        placeholder="Enter Test" />
                                 </div>
                             </div>
                             <div class="form-row">
@@ -65,8 +67,24 @@
                                         placeholder="Enter Lot 2" value="{{ old('lot_2', $certificate->lot_2) }}" />
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputPassword4">Status</label>
+                                    <select class="form-control" name="status" id="">
+                                        <option value="1" {{ $certificate->status == 1 ? 'selected' : '' }}>Enabled
+                                        </option>
+                                        <option value="0" {{ $certificate->status == 0 ? 'selected' : '' }}>Disabled
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <input type="submit" name="update" class="btn btn_primary mt-4" value="Submit and exit"
+                                    id="formSubmit">
+                                <input type="submit" name="editcertificate" class="btn btn_primary mt-4"
+                                    value="Save and edit certificate" id="formSubmit">
+                            </div>
                         </form>
-                        <input type="button" class="btn w-100 btn_primary mt-4" value="Submit" id="formSubmit">
                     </div>
                 </div>
             </div>
@@ -75,6 +93,14 @@
 @endsection
 
 @push('header')
+    <style>
+        label.error {
+            padding: 5px 0;
+            color: #f00;
+            margin: 0;
+            font-size: 15px;
+        }
+    </style>
 @endpush
 
 @push('footer')
@@ -89,17 +115,18 @@
                 },
                 cer_number: {
                     required: true,
-                    // remote: {
-                    //     url: "{{ route('admin.certificates.checkNumber') }}",
-                    //     type: "post",
-                    //     data: {
-                    //         _token: "{{ csrf_token() }}",
-                    //         cer_number: function() {
-                    //             return $("#cer_number").val();
-                    //         }
-                    //     },
-                    //     dataType: 'json'
-                    // }
+                    remote: {
+                        url: "{{ route('admin.certificates.checkNumber') }}",
+                        type: "post",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cer_number: function() {
+                                return $("#cer_number").val();
+                            },
+                            current_id: "{{ $certificate->id }}",
+                        },
+                        dataType: 'json'
+                    }
                 },
             },
             messages: {
@@ -109,16 +136,6 @@
                     required: "Please enter certificate number",
                     remote: "This certificate already exist",
                 },
-            }
-        });
-    </script>
-    <script>
-        $('#formSubmit').on('click', function() {
-            if (!$('#file_id').val()) {
-                alert('Please upload a file first');
-                return false;
-            } else {
-                $('#mainForm').submit();
             }
         });
     </script>

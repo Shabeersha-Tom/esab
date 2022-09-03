@@ -6,7 +6,6 @@
                 <div class="mb-3 d-flex align-items-center justify-content-between">
                     <h1 class="m-0 p-0">Certificates</h1>
                     <div class="btn_group">
-
                         @if (auth()->user()->isA('superadmin'))
                             @if ($selected_user || $start_date || $end_date)
                                 <a href="{{ route('admin.certificates.index') }}" class="btn btn_primary">Clear Filter</a>
@@ -21,13 +20,13 @@
                                 <input type="submit" value="Export Excel" class="btn btn_primary">
                             </form>
                         @endif
-
                     </div>
                 </div>
-
                 <div class="separator mb-5"></div>
             </div>
         </div>
+        
+        <x-form.status />
 
         <div class="row">
             <div class="col-xl-12">
