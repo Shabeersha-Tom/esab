@@ -30,7 +30,7 @@ function generateQRCode($slug, $time)
 {
     $output_file = 'qr-code/img-' . $time . '.png';
     $url = URL::to(route('certificate.view', $slug));
-    $qrString = QrCode::size(110)->backgroundColor(255, 255, 255, 0)->format('png')->generate($url);
+    $qrString = QrCode::size(80)->backgroundColor(255, 255, 255, 0)->format('png')->generate($url);
     Storage::disk('public')->put($output_file, $qrString);
     return  Storage::disk('public')->path($output_file);
 }

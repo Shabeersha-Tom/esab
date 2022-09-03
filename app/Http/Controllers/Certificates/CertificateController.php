@@ -267,8 +267,11 @@ class CertificateController extends Controller
             abort(403);
         }
 
-        $x = $request->x / 5.9;
-        $y = $request->y / 5.9;
+        $x = $request->x / 5.75;
+        $y = $request->y / 6.2;
+        
+        // $x = $request->x / 5.9;
+        // $y = $request->y / 5.9;
 
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
