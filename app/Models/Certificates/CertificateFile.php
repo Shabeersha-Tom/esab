@@ -32,6 +32,11 @@ class CertificateFile extends Model
         return Storage::disk('public')->path("certificates/" . $id . '/' . $this->path);
     }
 
+    public function getOgFileStoragePath($id)
+    {
+        return "certificates-orginal/" . $id . '/' . $this->path;
+    }
+
     public function getFileStoragePath($id)
     {
         return "certificates/" . $id . '/' . $this->path;
