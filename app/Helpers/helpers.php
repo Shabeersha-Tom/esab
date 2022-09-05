@@ -48,6 +48,9 @@ function moveFile($old_path, $new_path)
 {
     $fileName = 'public' . Str::remove('/storage', $old_path);
     if (Storage::exists($fileName)) {
+        if (Storage::exists($new_path)) {
+            deleteFile($new_path);
+        }
         Storage::move($fileName, $new_path);
     }
 }
