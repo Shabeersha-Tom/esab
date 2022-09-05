@@ -64,7 +64,7 @@ function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
         $x = 145;
         $y = 30;
     } else if ($position == 'bottom_left') {
-        $x = 14;
+        $x = 25;
         $y = 245;
     } else if ($position == 'bottom_right') {
         $x = 160;
