@@ -59,12 +59,11 @@ function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
     if ($position ==  'manual') {
         $x = $xLoc;
         $y = $yLoc;
-        Log::debug('x,y after convert : ' . $x . '--' . $y);
     } else if ($position == 'top_left' || $position == 'top_right') {
-        $x = 145;
-        $y = 30;
+        $x = 150;
+        $y = 40;
     } else if ($position == 'bottom_left') {
-        $x = 25;
+        $x = 20;
         $y = 245;
     } else if ($position == 'bottom_right') {
         $x = 160;
