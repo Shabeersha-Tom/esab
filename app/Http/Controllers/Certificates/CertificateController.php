@@ -104,16 +104,16 @@ class CertificateController extends Controller
 
         if ($status) {
             // get old director
+            $oldDir = Storage::path('public/certificates-orginal/' . $oldNumber . "/");
+            $newDir = Storage::path('public/certificates-orginal/' . $request->cer_number . "/");
+            // Rename
+            rename($oldDir, $newDir);
+
+            // get old director
             $oldDir = Storage::path('public/certificates/' . $oldNumber . "/");
             $newDir = Storage::path('public/certificates/' . $request->cer_number . "/");
             // Rename
-            $renameStatus = rename($oldDir, $newDir);
-            // If rename not success change the certificate number back
-            if (!$renameStatus) {
-                $status = $certificate->update([
-                    'certificate_no' => $oldNumber,
-                ]);
-            }
+            rename($oldDir, $newDir);
         }
 
         if ($request->update) {
@@ -149,7 +149,7 @@ class CertificateController extends Controller
         if (empty($files)) {
             Storage::deleteDirectory('public/certificates-orginal/' . $certificate->certificate_no . "/");
         }
-        
+
         $files = Storage::allFiles('public/certificates/' . $certificate->certificate_no . "/");
         if (empty($files)) {
             Storage::deleteDirectory('public/certificates/' . $certificate->certificate_no . "/");
