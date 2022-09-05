@@ -20,6 +20,11 @@ function processAutoUpload(Certificate $certificate, CertificateFile $file, $pos
 {
     $time = time();
     $qr = generateQRCode($certificate->slug, $time);
+
+    $old_path = "/public/certificates-orginal/" . $certificate->certificate_no . '/' . $file->path;
+    $new_path = "/public/certificates/" . $certificate->certificate_no . '/' . $file->path;
+    copyFile($old_path, $new_path);
+
     $cerificate_image = $file->getFilePath($certificate->certificate_no);
     mergeImages($qr, $cerificate_image, $file->path, $position, $x, $y);
     cleanFiles($time);
@@ -44,8 +49,8 @@ function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
     $size = $pdf->getTemplateSize($tplId);
     // $pdf->AddPage('P','A4');
     $pdf->AddPage();
-    $pdf->SetMargins(0,0,0);
-    $pdf->SetXY(0,0);
+    $pdf->SetMargins(0, 0, 0);
+    $pdf->SetXY(0, 0);
     $pdf->SetCompression(false);
     $pdf->useTemplate($tplId, null, null, $size['width'], $size['height'], FALSE);
     $x = 0;

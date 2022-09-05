@@ -35,6 +35,12 @@ function uploadImage(Request $request, $input, $path)
     return null;
 }
 
+function copyFile($old_path, $new_path)
+{
+    if (Storage::exists($old_path)) {
+        Storage::copy($old_path, $new_path);
+    }
+}
 function moveFile($old_path, $new_path)
 {
     $fileName = 'public' . Str::remove('/storage', $old_path);

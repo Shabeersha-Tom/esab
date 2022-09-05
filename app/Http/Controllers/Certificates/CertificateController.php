@@ -219,7 +219,7 @@ class CertificateController extends Controller
             ]);
 
             $old_path = "/storage/temp/" . $file->path;
-            $new_path = "/public/certificates/" . $request->cer_number . '/' . $file->path;
+            $new_path = "/public/certificates-orginal/" . $request->cer_number . '/' . $file->path;
 
             moveFile($old_path, $new_path);
 
@@ -261,7 +261,7 @@ class CertificateController extends Controller
             ]);
 
             $old_path = "/storage/temp/" . $file->path;
-            $new_path = "/public/certificates/" . $request->cer_number . '/' . $file->path;
+            $new_path = "/public/certificates-orginal/" . $request->cer_number . '/' . $file->path;
 
             moveFile($old_path, $new_path);
 

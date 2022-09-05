@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <input type="submit" name="update" class="btn btn_primary mt-4" value="Submit and exit"
+                                <input type="submit" name="update" class="btn btn_primary mt-4" value="Save data only"
                                     id="formSubmit">
                                 <input type="submit" name="editcertificate" class="btn btn_primary mt-4"
                                     value="Save and edit certificate" id="formSubmit">

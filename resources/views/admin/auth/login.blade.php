@@ -13,13 +13,13 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <label class="form-group has-float-label mb-4">
-                                <input name="email" type="email" autocomplete="email" class="form-control" />
+                                <input name="email" type="email" autocomplete="email" class="form-control" required/>
                                 <span>E-mail</span>
                                 <x-form.error name="email"/>
                             </label>
                             <label class="form-group has-float-label mb-4">
                                 <input  name="password" autocomplete="password" class="form-control" type="password"
-                                    placeholder="" />
+                                    placeholder="" required/>
                                 <span>Password</span>
                             </label>
                             <div class="d-flex justify-content-between align-items-center">
