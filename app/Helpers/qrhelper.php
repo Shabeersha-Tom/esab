@@ -89,7 +89,7 @@ function convertPdfToImage(Certificate $certificate, CertificateFile $file)
 {
     $fileName = basename($file->path, '.pdf') . '.jpg';
     $image_path = storage_path('app/public/pdfImages/' . $certificate->certificate_no . $fileName);
-    $pdf = new Pdf($file->getFilePath($certificate->certificate_no));
+    $pdf = new Pdf($file->getOgFilePath($certificate->certificate_no));
     $pdf->setResolution(300);
     $pdf->saveImage($image_path);
     return URL::to('storage/pdfImages/' . $certificate->certificate_no . $fileName);

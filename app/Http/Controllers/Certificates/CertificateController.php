@@ -119,6 +119,16 @@ class CertificateController extends Controller
         if ($request->update) {
             return redirect()->route('admin.certificates.index')->with('status', 'Certificate updated');
         }
+
+        if ($request->editcertificate) {
+            $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
+            $certificateImage = convertPdfToImage($certificate, $file);
+            return redirect()->route('admin.certificates.placeQr')->with([
+                'image_path' => $certificateImage,
+                'file_id' => $file->id,
+                'certificate_id' => $certificate->id
+            ]);
+        }
     }
 
     public function download(Certificate $certificate)

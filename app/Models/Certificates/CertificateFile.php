@@ -23,6 +23,10 @@ class CertificateFile extends Model
         return $this->belongsTo(Certificate::class, 'certificate_no');
     }
 
+    public function getOgFilePath($id)
+    {
+        return Storage::disk('public')->path("certificates-orginal/" . $id . '/' . $this->path);
+    }
     public function getFilePath($id)
     {
         return Storage::disk('public')->path("certificates/" . $id . '/' . $this->path);
