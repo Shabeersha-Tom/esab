@@ -121,7 +121,9 @@ class CertificateController extends Controller
         }
 
         if ($request->editcertificate) {
-            $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
+            $certificate->load('file');
+            $file = $certificate->file;
+            // $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
             $certificateImage = convertPdfToImage($certificate, $file);
             return redirect()->route('admin.certificates.placeQr')->with([
                 'image_path' => $certificateImage,
