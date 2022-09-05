@@ -38,6 +38,9 @@ function uploadImage(Request $request, $input, $path)
 function copyFile($old_path, $new_path)
 {
     if (Storage::exists($old_path)) {
+        if (Storage::exists($new_path)) {
+            deleteFile($new_path);
+        }
         Storage::copy($old_path, $new_path);
     }
 }
