@@ -341,15 +341,15 @@ class CertificateController extends Controller
         $file = CertificateFile::find($request->file_id);
         $certificate = Certificate::find($request->certificate_id);
 
-        $filePath = $file->getFileStoragePath($certificate->certificate_no);
-
+        $filePath = $file->getOgFileStoragePath($certificate->certificate_no);
         deleteFile($filePath);
-
         $files = Storage::allFiles('public/certificates-orginal/' . $certificate->certificate_no . "/");
         if (empty($files)) {
             Storage::deleteDirectory('public/certificates-orginal/' . $certificate->certificate_no . "/");
         }
 
+        $filePath = $file->getFileStoragePath($certificate->certificate_no);
+        deleteFile($filePath);
         $files = Storage::allFiles('public/certificates/' . $certificate->certificate_no . "/");
         if (empty($files)) {
             Storage::deleteDirectory('public/certificates/' . $certificate->certificate_no . "/");
