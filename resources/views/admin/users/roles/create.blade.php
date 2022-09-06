@@ -121,6 +121,18 @@
                                         name="ability[certificates-add]">
                                     <label class="custom-control-label" for="certificate_add">Add</label>
                                 </div>
+
+                                <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="certificate_edit"
+                                        name="ability[certificates-edit]">
+                                    <label class="custom-control-label" for="certificate_edit">Edit</label>
+                                </div>
+                                <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="certificate_delete"
+                                        name="ability[certificates-delete]">
+                                    <label class="custom-control-label" for="certificate_delete">Delete</label>
+                                </div>
+
                                 <div class="custom-control custom-checkbox form-check-inline mb-2">
                                     <input type="checkbox" class="custom-control-input" id="certificates_export"
                                         name="ability[certificates-export]">

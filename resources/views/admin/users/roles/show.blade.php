@@ -107,11 +107,28 @@
                                     name="ability[certificates-add]" disabled>
                                 <label class="custom-control-label" for="certificate_add">Add</label>
                             </div>
-                            {{-- <div class="custom-control custom-checkbox form-check-inline mb-2">
-                                <input type="checkbox" {{ in_array('certificates-delete', $abilities) ? 'checked' : '' }} class="custom-control-input" id="certificate_delete"
-                                    name="ability[certificates-delete]" disabled>
+                            <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                <input type="checkbox"
+                                    {{ in_array('certificates-edit', $abilities) ? 'checked' : '' }}
+                                    class="custom-control-input" id="certificate_edit"
+                                    name="ability[certificates-edit]">
+                                <label class="custom-control-label" for="certificate_edit">Edit</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                <input type="checkbox"
+                                    {{ in_array('certificates-delete', $abilities) ? 'checked' : '' }}
+                                    class="custom-control-input" id="certificate_delete"
+                                    name="ability[certificates-delete]">
                                 <label class="custom-control-label" for="certificate_delete">Delete</label>
-                            </div> --}}
+                            </div>
+                            <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                <input type="checkbox"
+                                    {{ in_array('certificates-export', $abilities) ? 'checked' : '' }}
+                                    class="custom-control-input" id="certificates_export"
+                                    name="ability[certificates-export]">
+                                <label class="custom-control-label" for="certificates_export">Export</label>
+                            </div>
                         </div>
                     </div>
                 </div>

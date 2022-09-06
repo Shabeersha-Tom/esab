@@ -107,8 +107,7 @@
                             <h5 class="mb-3"><b>Dashboard</b></h5>
                             <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
                                 <div class="custom-control custom-checkbox form-check-inline mb-2">
-                                    <input type="checkbox"
-                                        {{ in_array('dashboard', $abilities) ? 'checked' : '' }}
+                                    <input type="checkbox" {{ in_array('dashboard', $abilities) ? 'checked' : '' }}
                                         class="custom-control-input" id="dashboard" name="ability[dashboard]">
                                     <label class="custom-control-label" for="dashboard">View Dashboard</label>
                                 </div>
@@ -139,6 +138,23 @@
                                         name="ability[certificates-add]">
                                     <label class="custom-control-label" for="certificate_add">Add</label>
                                 </div>
+
+                                <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                    <input type="checkbox"
+                                        {{ in_array('certificates-edit', $abilities) ? 'checked' : '' }}
+                                        class="custom-control-input" id="certificate_edit"
+                                        name="ability[certificates-edit]">
+                                    <label class="custom-control-label" for="certificate_edit">Edit</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox form-check-inline mb-2">
+                                    <input type="checkbox"
+                                        {{ in_array('certificates-delete', $abilities) ? 'checked' : '' }}
+                                        class="custom-control-input" id="certificate_delete"
+                                        name="ability[certificates-delete]">
+                                    <label class="custom-control-label" for="certificate_delete">Delete</label>
+                                </div>
+
                                 <div class="custom-control custom-checkbox form-check-inline mb-2">
                                     <input type="checkbox"
                                         {{ in_array('certificates-export', $abilities) ? 'checked' : '' }}
@@ -146,13 +162,7 @@
                                         name="ability[certificates-export]">
                                     <label class="custom-control-label" for="certificates_export">Export</label>
                                 </div>
-                                {{-- <div class="custom-control custom-checkbox form-check-inline mb-2">
-                                    <input type="checkbox"
-                                        {{ in_array('certificates-delete', $abilities) ? 'checked' : '' }}
-                                        class="custom-control-input" id="certificate_delete"
-                                        name="ability[certificates-delete]">
-                                    <label class="custom-control-label" for="certificate_delete">Delete</label>
-                                </div> --}}
+
                             </div>
                         </div>
                     </div>
