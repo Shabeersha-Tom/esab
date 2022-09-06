@@ -13,7 +13,7 @@ class CertificateExport implements FromQuery,  WithMapping, WithHeadings
 
     public function query()
     {
-        return Certificate::where('status', 1)->query();
+        return Certificate::query()->where('status', 1);
     }
 
     public function headings(): array
