@@ -15,8 +15,8 @@
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <input autofocus name="q" required type="text" class="form-control" id="inputEmail4"
-                                        placeholder="Search certificate no / test / item / lot ">
+                                    <input autofocus name="q" required type="text" class="form-control"
+                                        id="inputEmail4" placeholder="Search certificate no / test / item / lot ">
                                 </div>
                             </div>
                             <div class="form-row">

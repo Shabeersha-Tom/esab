@@ -23,9 +23,8 @@ class CertificateFactory extends Factory
             'item_2' => Str::random(3),
             'lot_1' => Str::random(3),
             'lot_2' => Str::random(3),
-            'views' => $this->faker->randomDigit(),
-            'downloads' => $this->faker->randomDigit(),
             'slug' => $this->faker->unique()->uuid(),
+            'created_at' => $this->faker->dateTimeInInterval('-1 days', '+4 days')
         ];
     }
 }
