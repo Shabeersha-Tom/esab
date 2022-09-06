@@ -355,6 +355,8 @@ class CertificateController extends Controller
             Storage::deleteDirectory('public/certificates/' . $certificate->certificate_no . "/");
         }
 
+        cleanPdfImage($certificate, $file);
+
         $certificate->file->delete();
         $certificate->delete();
 

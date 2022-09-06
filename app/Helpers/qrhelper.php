@@ -27,7 +27,8 @@ function processAutoUpload(Certificate $certificate, CertificateFile $file, $pos
 
     $cerificate_image = $file->getFilePath($certificate->certificate_no);
     mergeImages($qr, $cerificate_image, $file->path, $position, $x, $y);
-    cleanFiles($time, $certificate, $file);
+    cleanFiles($time);
+    cleanPdfImage($certificate, $file);
     return true;
 }
 
@@ -74,17 +75,20 @@ function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
     $pdf->Output('F', $cerificate);
 }
 
-function cleanFiles($time, Certificate $certificate, CertificateFile $file)
+function cleanFiles($time)
 {
     $output_file = "public/qr-code/img-" . $time . ".png";
     if (Storage::exists($output_file)) {
         Storage::delete($output_file);
     }
+}
 
+function cleanPdfImage(Certificate $certificate, CertificateFile $file)
+{
     $fileName = basename($file->path, '.pdf') . '.jpg';
     $image_path = storage_path('app/public/pdfImages/' . $certificate->certificate_no . $fileName);
-    
-    if(is_file($image_path)){
+
+    if (is_file($image_path)) {
         unlink($image_path);
     }
 }
