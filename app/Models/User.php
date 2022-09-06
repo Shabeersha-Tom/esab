@@ -78,7 +78,7 @@ class User extends Authenticatable
         if (
             $this->can('admin-role-list') ||
             $this->can('admin-role-view') ||
-            $this->can('admin-role-add') ||
+            $this->can('admin-role-add')  ||
             $this->can('admin-role-edit') ||
             $this->can('admin-role-delete')
         ) {
@@ -91,7 +91,9 @@ class User extends Authenticatable
         if (
             $this->can('certificates-list') ||
             $this->can('certificates-view') ||
-            $this->can('certificates-add')
+            $this->can('certificates-add')  ||
+            $this->can('certificates-edit') ||
+            $this->can('certificates-delete')
         ) {
             return true;
         }

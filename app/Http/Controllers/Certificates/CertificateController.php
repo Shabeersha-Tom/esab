@@ -80,6 +80,10 @@ class CertificateController extends Controller
 
     public function edit(Certificate $certificate)
     {
+        if (!Auth::user()->can('certificates-edit')) {
+            abort(403);
+        }
+
         $certificate->load(['file']);
         return view('admin.certificates.edit')
             ->with([
@@ -89,6 +93,11 @@ class CertificateController extends Controller
 
     public function update(Certificate $certificate, Request $request)
     {
+
+        if (!Auth::user()->can('certificates-edit')) {
+            abort(403);
+        }
+
         $oldNumber = $certificate->certificate_no;
 
         $status = $certificate->update([
@@ -147,9 +156,9 @@ class CertificateController extends Controller
 
     public function delete(Certificate $certificate)
     {
-        // if (!Auth::user()->can('certificates-delete')) {
-        //     abort(403);
-        // }
+        if (!Auth::user()->can('certificates-delete')) {
+            abort(403);
+        }
 
         $certificate->views()->delete();
 

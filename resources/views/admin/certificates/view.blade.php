@@ -17,16 +17,20 @@
                     <div class="certificate_action w-100 d-flex justify-content-between">
 
                         <div>
-                            <a href="#" id="deleteBtn">
-                                <span class="mr-3">
-                                    <i class="glyph-icon simple-icon-trash pr-1"></i>Delete
-                                </span>
-                            </a>
-                            <a href="{{ route('admin.certificates.edit', $certificate) }}">
-                                <span class="mr-3">
-                                    <i class="glyph-icon simple-icon-pencil pr-1"></i>Edit
-                                </span>
-                            </a>
+                            @if (auth()->user()->can('certificates-delete'))
+                                <a href="#" id="deleteBtn">
+                                    <span class="mr-3">
+                                        <i class="glyph-icon simple-icon-trash pr-1"></i>Delete
+                                    </span>
+                                </a>
+                            @endif
+                            @if (auth()->user()->can('certificates-edit'))
+                                <a href="{{ route('admin.certificates.edit', $certificate) }}">
+                                    <span class="mr-3">
+                                        <i class="glyph-icon simple-icon-pencil pr-1"></i>Edit
+                                    </span>
+                                </a>
+                            @endif
                         </div>
 
                         <div>

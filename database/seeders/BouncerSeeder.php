@@ -80,6 +80,10 @@ class BouncerSeeder extends Seeder
             'title' => 'Add Certificate',
         ]);
         $ban = Bouncer::ability()->firstOrCreate([
+            'name' => 'certificates-edit',
+            'title' => 'Edit Certificate',
+        ]);
+        $ban = Bouncer::ability()->firstOrCreate([
             'name' => 'certificates-delete',
             'title' => 'Delete Certificate',
         ]);
