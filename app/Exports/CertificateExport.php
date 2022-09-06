@@ -47,9 +47,9 @@ class CertificateExport implements FromQuery,  WithMapping, WithHeadings
             $certificate->lot_1,
             $certificate->item_2,
             $certificate->lot_2,
-            route('certificate.view', $certificate),
-            $certificate->getViews(),
-            $certificate->getDownloads(),
+            route('certificate.view', $certificate->slug),
+            $certificate->getViews() ?? 0,
+            $certificate->getDownloads() ?? 0,
             $certificate->user->name,
             $certificate->created_at->format('d/m/Y')
         ];
