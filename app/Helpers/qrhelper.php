@@ -84,8 +84,8 @@ function cleanFiles($time, Certificate $certificate, CertificateFile $file)
     $fileName = basename($file->path, '.pdf') . '.jpg';
     $image_path = storage_path('app/public/pdfImages/' . $certificate->certificate_no . $fileName);
     
-    if (Storage::exists($image_path)) {
-        Storage::delete($image_path);
+    if(is_file($image_path)){
+        unlink($image_path);
     }
 }
 
