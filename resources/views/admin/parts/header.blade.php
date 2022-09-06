@@ -21,12 +21,35 @@
             </svg>
         </a>
 
-        <div class="search" data-search-path="?q=">
+        <form class="search d-none align-content-center justify-content-center d-md-flex" method="POST"
+            action="{{ route('admin.certificates.search') }}">
+            @csrf
+            <div class="form-row w-100">
+                <div class="form-group col-md-12 mb-0">
+                    <input autofocus name="q" required type="text" class="form-control" id="inputEmail4"
+                        placeholder="Search certificate no / test / item / lot ">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2 mb-0">
+                    <button class="border-0" type="submit">
+                        <span class="search-icon">
+                            <i class="simple-icon-magnifier"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        {{-- <div class="search" data-search-path="?q=">
+            
+            
+
             <input placeholder="Search..." />
             <span class="search-icon">
                 <i class="simple-icon-magnifier"></i>
             </span>
-        </div>
+        </div> --}}
     </div>
 
     <a class="navbar-logo" href="{{ route('admin.dashboard') }}">
@@ -41,7 +64,8 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right mt-3">
                 <a class="dropdown-item" href="{{ route('admin.user.profile') }}">Account</a>
-                <a class="dropdown-item" href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>
+                <a class="dropdown-item" href="#"
+                    onclick="document.getElementById('logoutForm').submit();">Logout</a>
             </div>
         </div>
     </div>
