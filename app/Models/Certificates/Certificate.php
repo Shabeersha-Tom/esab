@@ -50,11 +50,11 @@ class Certificate extends Model implements Searchable, Viewable
 
     function getViews()
     {
-        return $this->views->where('collection', 'views')->unique('visitor')->count() > 0 ? $this->views->where('collection', 'views')->unique('visitor')->count() : 0;
+        return $this->views->where('collection', 'views')->unique('visitor')->count();
     }
 
     function getDownloads()
     {
-        return $this->views->where('collection', 'downloads')->unique('visitor')->count() ? $this->views->where('collection', 'downloads')->unique('visitor')->count() : 0;
+        return $this->views->where('collection', 'downloads')->unique('visitor')->count();
     }
 }
