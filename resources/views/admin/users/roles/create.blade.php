@@ -95,8 +95,8 @@
                             <h5 class="mb-3"><b>Dashboard</b></h5>
                             <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
                                 <div class="custom-control custom-checkbox form-check-inline mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="ability[dashboard]"
-                                        name="dashboard">
+                                    <input type="checkbox" class="custom-control-input" id="dashboard"
+                                        name="ability[dashboard]">
                                     <label class="custom-control-label" for="dashboard">View Dashboard</label>
                                 </div>
                             </div>
@@ -107,8 +107,8 @@
                             <h5 class="mb-3"><b>Certificates</b></h5>
                             <div class="form-group mb-0 form-check-inline position-relative flex-wrap">
                                 <div class="custom-control custom-checkbox form-check-inline mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="ability[certificates-list]"
-                                        name="certificate_list">
+                                    <input type="checkbox" class="custom-control-input" id="certificate_list"
+                                        name="ability[certificates-list]">
                                     <label class="custom-control-label" for="certificate_list">List View</label>
                                 </div>
                                 <div class="custom-control custom-checkbox form-check-inline mb-2">

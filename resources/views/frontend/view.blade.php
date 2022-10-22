@@ -83,12 +83,20 @@
                                     <p><b>{{ $certificate->certificate_name }} </b></p>
                                     <p><b>Certificate No : </b> {{ $certificate->certificate_no }}</p>
                                     <div class="data_line">
-                                        <p><b>Item 1: </b> {{ $certificate->item_1 ?? '-----' }}</p>
-                                        <p><b>Lot 1: </b> {{ $certificate->lot_1 ?? '-----' }}</p>
+                                        @if ($certificate->item_1)
+                                            <p><b>Item 1: </b> {{ $certificate->item_1 }}</p>
+                                        @endif
+                                        @if ($certificate->lot_1)
+                                            <p><b>Lot 1: </b> {{ $certificate->lot_1 }}</p>
+                                        @endif
                                     </div>
                                     <div class="data_line">
-                                        <p><b>Item 2: </b> {{ $certificate->item_2 ?? '-----' }}</p>
-                                        <p><b>Lot 2: </b> {{ $certificate->lot_2 ?? '-----' }}</p>
+                                        @if ($certificate->item_2)
+                                            <p><b>Item 2: </b> {{ $certificate->item_2 }}</p>
+                                        @endif
+                                        @if ($certificate->lot_2)
+                                            <p><b>Lot 2: </b> {{ $certificate->lot_2 }}</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -164,8 +172,7 @@
                     viewport: viewport
                 };
                 var renderTask = page.render(renderContext);
-                renderTask.promise.then(function() {
-                });
+                renderTask.promise.then(function() {});
             });
         }, function(reason) {
             console.error(reason);

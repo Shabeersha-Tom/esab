@@ -67,16 +67,16 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="inputPassword4">Item 2</label>
-                                    <input type="text" class="form-control" name="item_2" id="item_2"
-                                        placeholder="Enter Item 2" value="{{ old('item_2') }}" />
+                                    <label for="inputPassword4">Lot 1</label>
+                                    <input type="text" class="form-control" name="lot_1" id="lot_1"
+                                        placeholder="Enter Lot 1" value="{{ old('lot_1') }}" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="inputPassword4">Lot 1</label>
-                                    <input type="text" class="form-control" name="lot_1" id="lot_1"
-                                        placeholder="Enter Lot 1" value="{{ old('lot_1') }}" />
+                                    <label for="inputPassword4">Item 2</label>
+                                    <input type="text" class="form-control" name="item_2" id="item_2"
+                                        placeholder="Enter Item 2" value="{{ old('item_2') }}" />
                                 </div>
                             </div>
                             <div class="form-row">

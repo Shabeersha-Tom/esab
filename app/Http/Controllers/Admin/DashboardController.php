@@ -45,7 +45,7 @@ class DashboardController extends Controller
         }
 
         $usersCount = User::count();
-        $certificatesCount = Certificate::count();
+        $certificatesCount = Certificate::whereStatus(1)->count();
         $certificatesViewCount = views(Certificate::class)->collection('views')->unique()->count();
         $certificatesDownloadCount = views(Certificate::class)->collection('downloads')->unique()->count();
 

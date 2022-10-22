@@ -43,9 +43,9 @@ class CertificateController extends Controller
 
         $users = User::whereHas('certificate')->get();
         $query = Certificate::whereStatus(true)->with(['user', 'views']);
-        if (Auth::user()->isNotA('superadmin')) {
-            $query->where('user_id', Auth::user()->id);
-        }
+        // if (Auth::user()->isNotA('superadmin')) {
+        //     $query->where('user_id', Auth::user()->id);
+        // }
         if ($request->user_id && $request->user_id !== '0') {
             $query->where('user_id', $request->user_id);
         }
@@ -411,12 +411,12 @@ class CertificateController extends Controller
             $q->searchable->load('user');
         });
 
-        if (!$isAdmin) {
-            $filtered = $searchResults->filter(function ($q)  use ($isAdmin, $user) {
-                return $q->searchable->user_id == $user;
-            });
-            $searchResults =  $filtered;
-        }
+        // if (!$isAdmin) {
+        //     $filtered = $searchResults->filter(function ($q)  use ($isAdmin, $user) {
+        //         return $q->searchable->user_id == $user;
+        //     });
+        //     $searchResults =  $filtered;
+        // }
 
         return view('admin.certificates.search-result')
             ->with(['searchResults' => $searchResults]);
