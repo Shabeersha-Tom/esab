@@ -31,10 +31,12 @@ class LogSuccessfulLogin
     {
         $certificates = Auth::user()->certificate()->where('status', 0)->with('file')->get();
         foreach ($certificates as $certificate) {
-            $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
-            deleteFile($file);
-            $certificate->file->delete();
-            $certificate->delete();
+            if($certificate->file){
+                $file = $certificate->file->getFileStoragePath($certificate->certificate_no);
+                deleteFile($file);
+                $certificate->file->delete();
+                $certificate->delete();
+            }
         }
 
         if (Auth::user()->isA('superadmin')) {
@@ -43,11 +45,13 @@ class LogSuccessfulLogin
                 ->where('created_at', '<', Carbon::parse('-24 hours'))
                 ->get();
             foreach ($certificate_files as $file) {
-                $fileName = 'public/temp/' . $file->path;
-                if (Storage::exists($fileName)) {
-                    Storage::delete($fileName);
+                if($certificate->file){
+                    $fileName = 'public/temp/' . $file->path;
+                    if (Storage::exists($fileName)) {
+                        Storage::delete($fileName);
+                    }
+                    $file->delete();
                 }
-                $file->delete();
             }
 
             $folderName = 'public/certificates/';
