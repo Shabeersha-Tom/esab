@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('content')
-    <div class="container-fluid disable-text-selection">
+    <div class="container-fluid ">
         <div class="row">
             <div class="col-12">
                 <div class="mb-0">
@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div class="row list disable-text-selection">
+        <div class="row list ">
             <div class="col-lg-12 col-md-12 mb-4">
                 <div class="card recent_certificate">
                     <div class="card-body">
@@ -39,7 +39,7 @@
                                             @foreach ($searchResults as $searchResult)
                                                 <tr>
                                                     <td>
-                                                        <a href="certificate_view.html">
+                                                        <a href="{{ route('admin.certificates.view', $searchResult->searchable) }}">
                                                             {{ $searchResult->searchable->certificate_no }}
                                                         </a>
                                                     </td>

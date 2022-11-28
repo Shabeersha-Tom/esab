@@ -15,6 +15,8 @@
                         <form id="mainForm" method="POST" action="{{ route('admin.certificates.edit', $certificate) }}">
                             @csrf
                             <x-form.error name="file_error" />
+                            
+                            @if (auth()->user()->isA('superadmin'))
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Certificate Title</label>
@@ -31,6 +33,8 @@
                                         value="{{ old('cer_number', $certificate->certificate_no) }}" required />
                                 </div>
                             </div>
+                            @endif
+                            
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Test</label>
@@ -79,10 +83,12 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <input type="submit" name="update" class="btn btn_primary mt-4" value="Save data only"
-                                    id="formSubmit">
-                                <input type="submit" name="editcertificate" class="btn btn_primary mt-4"
-                                    value="Save and edit certificate" id="formSubmit">
+                                
+                                @if (auth()->user()->can('certificates-edit'))
+                                    <input type="submit" name="update" class="btn btn_primary mt-4" value="Save data only" id="formSubmit">
+                                    <input type="submit" name="editcertificate" class="btn btn_primary mt-4" value="Save and edit certificate" id="formSubmit">
+                                @endif
+                                    
                             </div>
                         </form>
                     </div>

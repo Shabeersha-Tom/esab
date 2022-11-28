@@ -314,7 +314,7 @@ class CertificateController extends Controller
 
     public function placeQrView()
     {
-        if (!Auth::user()->can('certificates-add')) {
+        if (!Auth::user()->can('certificates-add') || !Auth::user()->can('certificates-edit')) {
             abort(403);
         }
         return view('admin.certificates.certificatePlacement')->with([
@@ -326,7 +326,7 @@ class CertificateController extends Controller
 
     public function placeQr(Request $request)
     {
-        if (!Auth::user()->can('certificates-add')) {
+        if (!Auth::user()->can('certificates-add') || !Auth::user()->can('certificates-edit')) {
             abort(403);
         }
 
@@ -369,7 +369,7 @@ class CertificateController extends Controller
         $certificate->file->delete();
         $certificate->delete();
 
-        return redirect()->route('admin.certificates.uploadmanual');
+        return redirect()->route('admin.certificates.index');
     }
 
     public function checkNumber(Request $request)

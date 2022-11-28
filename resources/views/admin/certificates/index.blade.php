@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin')
 @section('content')
-    <div class="container-fluid disable-text-selection">
+    <div class="container-fluid ">
         <div class="row">
             <div class="col-12">
                 <div class="mb-3 d-flex align-items-center justify-content-between">
@@ -163,26 +163,7 @@
 @endsection
 
 @push('footer')
-    <script>
-        $("#start_date").datepicker({
-            autoclose: true,
-            templates: {
-                leftArrow: '<i class="simple-icon-arrow-left"></i>',
-                rightArrow: '<i class="simple-icon-arrow-right"></i>'
-            },
-            format: 'dd-mm-yyyy',
-            endDate: '+0d',
-            orientation: 'bottom'
-        });
-        $("#end_date").datepicker({
-            autoclose: true,
-            format: 'dd-mm-yyyy',
-            endDate: '+0d',
-            templates: {
-                leftArrow: '<i class="simple-icon-arrow-left"></i>',
-                rightArrow: '<i class="simple-icon-arrow-right"></i>'
-            },
-            orientation: 'bottom'
-        });
+    <script >
+        
     </script>
 @endpush

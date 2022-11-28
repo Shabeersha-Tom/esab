@@ -6,7 +6,7 @@
                 @if (auth()->user()->can('dashboard'))
                     <li class="{{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}">
                         <a href="{{ route('admin.dashboard') }}">
-                            <i class="iconsminds-shop-4"></i>
+                            <i class="iconsminds-digital-drawing"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
@@ -15,7 +15,7 @@
                 @if (auth()->user()->hasCertificatePrivilages())
                     <li class="{{ request()->routeIs('admin.certificates*') ? 'active' : '' }}">
                         <a href="#layouts">
-                            <i class="iconsminds-digital-drawing"></i>
+                            <i class="iconsminds-paper"></i>
                             Certificates
                         </a>
                     </li>
@@ -26,7 +26,7 @@
                     <li
                         class="{{ request()->routeIs('admin.roles*') | request()->routeIs('admin.users*') ? 'active' : '' }}">
                         <a href="#ui">
-                            <i class="iconsminds-air-balloon-1"></i> Admin
+                            <i class="iconsminds-administrator"></i> Admin
                         </a>
                     </li>
                 @endif
@@ -76,14 +76,14 @@
                         @if (auth()->user()->hasRolesPrivilages())
                             <li class="{{ request()->routeIs('admin.roles*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.roles.index') }}">
-                                    <i class="simple-icon-doc"></i> <span class="d-inline-block">Admin Roles</span>
+                                    <i class="iconsminds-profile"></i> <span class="d-inline-block">Admin Roles</span>
                                 </a>
                             </li>
                         @endif
                         @if (auth()->user()->hasUserPrivilages())
                             <li class="{{ request()->routeIs('admin.users*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.users.index') }}">
-                                    <i class="simple-icon-doc"></i> <span class="d-inline-block active">Admin
+                                    <i class="iconsminds-business-mens"></i> <span class="d-inline-block active">Admin
                                         Users</span>
                                 </a>
                             </li>

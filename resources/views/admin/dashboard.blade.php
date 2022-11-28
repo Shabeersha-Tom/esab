@@ -81,6 +81,10 @@
 @endsection
 
 @push('footer')
+
+    <script src="{{ getAdminAsset('js/vendor/Chart.bundle.min.js') }}"></script>
+    <script src="{{ getAdminAsset('js/vendor/chartjs-plugin-datalabels.js') }}"></script>
+
     <script>
         var rootStyle = getComputedStyle(document.body);
         var themeColor1 = rootStyle.getPropertyValue("--theme-color-1").trim();
@@ -132,7 +136,7 @@
         if (document.getElementById("salesChart")) {
             var salesChart = document.getElementById("salesChart").getContext("2d");
             var myChart = new Chart(salesChart, {
-                type: "LineWithShadow",
+                type: "line",
                 options: {
                     plugins: {
                         datalabels: {

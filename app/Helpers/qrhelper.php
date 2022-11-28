@@ -60,7 +60,10 @@ function mergeImages($qr, $cerificate, $name, $position, $xLoc, $yLoc)
     if ($position ==  'manual') {
         $x = $xLoc;
         $y = $yLoc;
-    } else if ($position == 'top_left' || $position == 'top_right') {
+    } else if ($position == 'top_left') {
+        $x = 20;
+        $y = 40;
+    } else if($position == 'top_right'){
         $x = 150;
         $y = 40;
     } else if ($position == 'bottom_left') {

@@ -12,7 +12,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-6 mb-4">
+            <div class="col-xl-8 mb-4">
                 <div class="certificate_head mb-2">
                     <div class="certificate_action w-100 d-flex justify-content-between">
 
